@@ -97,27 +97,15 @@ const LoginModal = () => {
 
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
-      <hr />
-      <Button 
-        outline 
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => signIn('google')}
-      />
-      <Button 
-        outline 
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => signIn('github')}
-      />
       <div className="
       text-neutral-500 text-center mt-4 font-light">
-        <p>First time using Airbnb?
+        <p>First time using univibe?
           <span 
             onClick={onToggle} 
             className="
-              text-neutral-800
+              text-[#ff297f]
               cursor-pointer 
+              font-bold
               hover:underline
             "
             > Create an account</span>

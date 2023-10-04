@@ -13,6 +13,7 @@ import LoginModal from './components/modals/LoginModal'
 import ToasterProvider from './providers/ToasterProvider'
 import getCurrentUser from './actions/getCurrentUser'
 import EmailModal from './components/modals/EmailModal'
+import CreateModal from './components/modals/CreateModal'
 
 const font = Montserrat({ subsets: ['latin'] })
 
@@ -44,11 +45,14 @@ export default async function RootLayout({
           <ConfettiProvider />
           <Navbar currentUser = {currentUser} />
           <EmailModal/>
+          <CreateModal/>
           <WelcomeModal/>
           <SuccessModal/>
           <LoginModal/>
           <RegisterModal />
-          {children}
+          <div className='pb-20 pt-28'>
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

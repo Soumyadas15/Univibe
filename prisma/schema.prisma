@@ -49,19 +49,18 @@ model Account {
 model Event {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   title           String
-  description     String
-  imageSrc String
+  description     String?
+  imageSrc String?
   createdAt DateTime @default(now())
-  category  String
-  department String
-  venue     String
-  date      DateTime
-  team      Boolean
+  category  String?
+  department String?
+  date      DateTime? @default(now())
+  venue     String?
   likedBy     String[] @db.ObjectId
   userId String @db.ObjectId
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reservations Registration[]
+  registrations Registration[]
 }
 
 model Registration {

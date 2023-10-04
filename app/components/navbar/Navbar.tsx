@@ -23,13 +23,11 @@ const Navbar: React.FC<NavbarProps> = ({
                 bg-white
                 dark:bg-neutral-900
                 z-10
-                shadow-sm
         ">
             <div
                 className="
                     py-4
-                    border-b-[1px]
-                    dark:border-none
+                    
                 "
             >
                 <Container>

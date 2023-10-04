@@ -4,7 +4,17 @@
         "name": "MCKV Institute of Engineering",
         "city": "Howrah",
         "state": "West Bengal"
-      } 
+      },
+      {
+        "name": "Indian Institute of Technology",
+        "city": "Kharagpur",
+        "state": "West Bengal"
+      },
+      {
+        "name": "Indian Institute of Technology",
+        "city": "Bombay",
+        "state": "Maharashtra"
+      }
     ]
   }
   

@@ -17,11 +17,6 @@ export type CollegeSelectValues = {
     
 }
 
-interface College {
-    name: string;
-    location: string;
-}
-
 interface CollegeSelectProps {
     value?: CollegeSelectValues;
     onChange: (value: CollegeSelectValues)  => void;
@@ -41,10 +36,10 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             ...provided,
             background: isDarkMode ? '#000000' : '#FFFFFF',
             color: 'white',
-            border: state.isFocused ? '2px solid #afafaf' : '2px solid #afafaf',
+            border: state.isFocused ? '2px solid #ff297f' : '2px solid #262626',
             boxShadow: 'none',
             '&:hover': {
-                border: state.isFocused ? '2px solid #3182ce' : '2px solid #718096',
+                border: state.isFocused ? '2px solid #ff297f' : '2px solid #262626',
             },
         }),
         menu: (provided: any) => ({
@@ -59,7 +54,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             <Select
                 styles={customStyles}
                 className='border-0'
-                placeholder="Anywhere"
+                placeholder="College"
                 isClearable
                 options={colleges.map(college => ({
                     label: college.name,

@@ -53,7 +53,7 @@ const Input: React.FC<InputProps> = ({
                     pt-6
                     font-light
 
-                    text-neutral-300
+                    text-neutral-800
                     dark:text-neutral-300
 
                     bg-white
@@ -63,11 +63,11 @@ const Input: React.FC<InputProps> = ({
                     rounded-md
                     outline-none
                     transition
-                    active:bg-neutral-700
+                    
                     disabled:opacity-70
                     disabled:cursor-not-allowed
                     ${formatPrice ? 'pl-9' : 'pl-4'}
-                    ${errors[id] ? 'border-[#ff297f]' : 'border-neutral-500'}
+                    ${errors[id] ? 'border-[#ff297f]' : 'border-neutral-500 dark:border-neutral-800'}
                     ${errors[id] ? 'focus:border-[#ff297f]' : 'focus:border-neutral-500'}
                 `}
             />

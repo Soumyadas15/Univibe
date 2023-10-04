@@ -17,12 +17,18 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 import useWelcomeModal from "@/app/hooks/useWelcomeModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import CollegeSelect, { CollegeSelectValues } from "../inputs/CollegeSelect";
+import useEmailModal from "@/app/hooks/useEmailModal";
 
 
 const RegisterModal= () => {
   const registerModal = useRegisterModal();
   const welcomeModal = useWelcomeModal();
+  const loginModal = useLoginModal();
+  const emailModal = useEmailModal();
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedCollege, setSelectedCollege] = useState<CollegeSelectValues | undefined>(undefined);
   
 
   const { 
@@ -38,6 +44,7 @@ const RegisterModal= () => {
       password: '',
       name: '',
     },
+
   });
 
   const handleClick = () => {
@@ -45,11 +52,19 @@ const RegisterModal= () => {
     welcomeModal.onOpen();
   }
 
+  const toggleForm = () => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+
+    if (selectedCollege) {
+      data.institute = selectedCollege.value;
+    }
     
     setIsLoading(true);
     
-
     axios.post('/api/register', data)
     .then(() => {
       registerModal.onClose();
@@ -87,14 +102,6 @@ const RegisterModal= () => {
         required
       />
       <Input
-        id="institute"
-        label="Institute"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
         id="password"
         label="Password"
         type="password"
@@ -103,14 +110,17 @@ const RegisterModal= () => {
         errors={errors}
         required
       />
+      <CollegeSelect
+          value={selectedCollege}
+          onChange={setSelectedCollege}
+          register={register}
+      />
       
     </div>
   )
 
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
-      <hr />
-      
       <div 
         className="
           text-neutral-500 
@@ -121,9 +131,10 @@ const RegisterModal= () => {
       >
         <p>Already have an account?
           <span 
-            onClick={() => {}} 
+            onClick={toggleForm} 
             className="
-              text-neutral-800
+              text-[#ff297f]
+              font-bold
               cursor-pointer 
               hover:underline
             "

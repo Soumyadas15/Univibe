@@ -1,7 +1,5 @@
 "use client"
 
-import { User } from "@prisma/client";
-
 import { ModeToggle } from "../toggle/ThemeToggle";
 import Avatar from "./Avatar";
 import { useCallback, useState } from "react";
@@ -14,17 +12,9 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
-
-
-import { 
-    DropdownMenu, 
-    DropdownMenuContent, 
-    DropdownMenuItem, 
-    DropdownMenuSeparator, 
-    DropdownMenuTrigger
-  } from "@/app/components/ui/dropdown-menu";
 import toast from "react-hot-toast";
 import useEmailModal from "@/app/hooks/useEmailModal";
+import useCreateModal from "@/app/hooks/useCreateModal";
 
 interface UserMenuProps {
     currentUser?: SafeUser | null;
@@ -40,6 +30,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
     const loginModal = useLoginModal();
     const router = useRouter();
     const emailModal = useEmailModal()
+    const createModal = useCreateModal();
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
@@ -51,6 +42,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
         toast.success("Fuck me")
     };
 
+    const onCreate = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+        createModal.onOpen();
+
+    }, [currentUser, loginModal])
+
     return ( 
         <div className="relative">
             <div className="
@@ -60,7 +59,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 gap-3
             ">
                 <div 
-                    onClick={handleOpen}
+                    onClick={onCreate}
                     className="
                         hidden
                         md:block
@@ -134,7 +133,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             />
                             <MenuItem 
                                 label="Add event" 
-                                onClick={() => {}}
+                                onClick={createModal.onOpen}
                             />
                             
                             <MenuItem 

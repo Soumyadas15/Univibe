@@ -7,11 +7,18 @@ import Lottie from "lottie-react";
 import animationData from '../../../public/assets/animation_ln7mb1dg.json'
 import { useConfettiStore } from "@/app/hooks/useConfettiStore";
 import useEmailModal from "@/app/hooks/useEmailModal";
+import { useCallback } from "react";
 
 
 const EmailModal = () => {
     const emailModal = useEmailModal();
     const confettiStore = useConfettiStore();
+    const welcomeModal = useWelcomeModal();
+
+    const handleClose = useCallback(() => {
+        emailModal.onClose();
+        welcomeModal.onOpen();
+    }, [])
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -32,8 +39,8 @@ const EmailModal = () => {
                 isOpen = {emailModal.isOpen}
                 title= "You're almost there"
                 actionLabel='Okay'
-                onClose={emailModal.onClose}
-                onSubmit={emailModal.onClose}
+                onClose={handleClose}
+                onSubmit={handleClose}
                 body={bodyContent}
             />
         </div>

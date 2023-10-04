@@ -1,0 +1,139 @@
+'use client';
+
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import { format } from 'date-fns';
+import moment from 'moment';
+
+import useCountries from "@/app/hooks/useCountries";
+import { 
+  
+  SafeUser 
+} from "@/app/types";
+
+
+import Button from "../Button";
+import { Event, Registration } from "@prisma/client";
+import HeartButton from "../HeartButton";
+
+interface ListingCardProps {
+  data: Event;
+  registration?: Registration;
+  onAction?: (id: string) => void;
+  disabled?: boolean;
+  actionLabel?: string;
+  actionId?: string;
+  currentUser?: SafeUser | null
+};
+
+const EventCard: React.FC<ListingCardProps> = ({
+  data,
+  registration,
+  onAction,
+  disabled,
+  actionLabel,
+  actionId = '',
+  currentUser,
+}) => {
+  const router = useRouter();
+  const { getByValue } = useCountries();
+
+  const { date } =  data;
+  
+  const formattedDate = moment(date).format("MMMM D, YYYY");
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const [month, day, year] = formattedDate.split(' ');
+  const abbreviatedMonth = month.substring(0, 3);
+  const trimmedDay = day.slice(0, -1);
+
+
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    if (disabled) {
+      return;
+    }
+
+    onAction?.(actionId)
+  }, [disabled, onAction, actionId]);
+
+
+  return (
+    <div 
+      onClick={() => router.push(`/events/${data.id}`)} 
+      className="col-span-1 cursor-pointer group  shadow-md dark:shadow-black p-3 rounded-lg"
+    >
+      <div className="flex flex-col gap-2 w-full">
+        <div 
+          className="
+            aspect-square 
+            w-full 
+            relative 
+            overflow-hidden 
+            rounded-xl
+          "
+        >
+          <Image
+            fill
+            className="
+              object-cover 
+              h-full 
+              w-full 
+              group-hover:scale-110 
+              transition
+            "
+            src={data.imageSrc}
+            alt="Listing"
+          />
+          <div className="
+            absolute
+            top-3
+            right-3
+          ">
+            <HeartButton 
+              eventId={data.id} 
+              currentUser={currentUser}
+            />
+          </div>
+        </div>
+        
+        {onAction && actionLabel && (
+          <Button
+            disabled={disabled}
+            small
+            label={actionLabel} 
+            onClick={handleCancel}
+          />
+        )}
+        <div className="flex justify-between">
+            <div>
+                <div className="font-semibold text-lg">
+                        {data.title}
+                </div>
+                <div>
+                    {data.venue}
+                </div>
+            </div>
+            <div>
+            <div className="flex text-center">
+                <div>
+                    <div className="font-bold text-2xl">
+                        {trimmedDay}
+                    </div>
+                    <div className="font-light text-lg">
+                        {abbreviatedMonth}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+   );
+}
+ 
+export default EventCard;

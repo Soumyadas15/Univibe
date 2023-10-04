@@ -31,9 +31,9 @@ const SuccessModal = () => {
             <Modal
                 isOpen = {successModal.isOpen}
                 title= "Hurray!"
-                actionLabel='Done'
+                actionLabel='Finish'
                 onClose={successModal.onClose}
-                onSubmit={confettiStore.onOpen}
+                onSubmit={successModal.onClose}
                 body={bodyContent}
             />
         </div>

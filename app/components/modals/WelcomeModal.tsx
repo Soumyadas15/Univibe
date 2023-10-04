@@ -19,8 +19,8 @@ const WelcomeModal = () => {
                 subtitle= 'You have successfully signed up'
                 center
             />
-            <div>
-                <Lottie animationData={animationData}/>
+            <div className="flex items-center justify-center">
+                <Lottie animationData={animationData} className="h-50 w-50 md:h-[150px] md:w-[150px]"/>
             </div>
         </div>
     )
