@@ -8,7 +8,13 @@ export default async function getEvents() {
             }
         });
 
-        return events;
+        const safeEvents = events.map((event) => ({
+            ...event,
+            createdAt: event.createdAt.toISOString(),
+
+        }));
+
+        return safeEvents;
     }
     catch (error: any){
         throw new Error(error);

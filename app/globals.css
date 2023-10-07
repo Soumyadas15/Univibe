@@ -7,3 +7,14 @@ body,
 :root{
     height: 100%;
 }
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/assets/fonts/myFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .your-class-name {
+    font-family: 'CustomFont', sans-serif;
+    /* other styles */
+  }

@@ -6,11 +6,18 @@ import Heading from "../Heading";
 import Lottie from "lottie-react";
 import animationData from '../../../public/assets/animation_ln34g03s.json'
 import { useConfettiStore } from "@/app/hooks/useConfettiStore";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 
 const WelcomeModal = () => {
     const welcomeModal = useWelcomeModal();
     const confettiStore = useConfettiStore();
+    const loginModal = useLoginModal();
+
+    const actionEvent = () => {
+        welcomeModal.onClose();
+        loginModal.onOpen();
+    }
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -30,9 +37,9 @@ const WelcomeModal = () => {
             <Modal
                 isOpen = {welcomeModal.isOpen}
                 title= "Hurray!"
-                actionLabel='Done'
+                actionLabel='Login'
                 onClose={welcomeModal.onClose}
-                onSubmit={welcomeModal.onClose}
+                onSubmit={actionEvent}
                 body={bodyContent}
             />
         </div>

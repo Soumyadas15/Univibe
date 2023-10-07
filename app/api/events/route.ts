@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
+
 export async function POST(
     request: Request
 ) {
@@ -18,6 +19,7 @@ export async function POST(
             category,
             department,
             venue,
+            college,
             imageSrc,
             title,
             description,
@@ -33,6 +35,7 @@ export async function POST(
                 category,
                 department,
                 venue,
+                college: currentUser.institute,
                 imageSrc,
                 title,
                 description,

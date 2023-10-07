@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 w-full
                 bg-white
                 dark:bg-neutral-900
-                z-10
+                z-20
         ">
             <div
                 className="

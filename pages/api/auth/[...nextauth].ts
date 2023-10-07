@@ -31,6 +31,10 @@ export const authOptions: AuthOptions = {
           throw new Error('Invalid credentials');
         }
 
+        if (!user.isVerified){
+          throw new Error('Email not verified');
+        }
+
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
@@ -39,6 +43,7 @@ export const authOptions: AuthOptions = {
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }
+
 
         return user;
       }

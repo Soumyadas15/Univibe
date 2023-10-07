@@ -5,6 +5,7 @@ import getEvents from '@/app/actions/getEvents';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+
 export default async function FeaturedEvents() {
 
     const events = await getEvents();
@@ -24,8 +25,9 @@ export default async function FeaturedEvents() {
             text-white 
             select-none
             pointer-events-none
+            font-custom
         ">
-            <div className='absolute z-10 font-bold text-3xl text-center select-text'>Experience college like never before</div>
+            <div className='absolute z-10 font-bold text-5xl md:text-8xl lg:text-8xl tracking-wider text-center select-text'>Live the Vibe</div>
             {sing && sing.imageSrc && (
                 <div className="absolute inset-0 overflow-hidden rounded-lg">
                     <div>

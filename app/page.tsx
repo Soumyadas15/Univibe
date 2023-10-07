@@ -5,12 +5,20 @@ import getEvents from './actions/getEvents';
 import EventCard from './components/events/EventCard';
 import getCurrentUser from './actions/getCurrentUser';
 import FeaturedEvents from './components/events/FeaturedEvents';
+import OtherCollegesFeatured from './components/events/OtherCollegesFeatured';
+import PageHeader from './components/events/PageHeader';
 
 export default async function Home() {
   const events = await getEvents();
   const currentUser = await getCurrentUser();
+  const currUserCollege = currentUser?.institute;
   
   const isEmpty = true;
+  const inMyCollege = events.filter((event) => event.college === currUserCollege).slice(0, 5);;
+  const notInMyCollege = events.filter((event) => event.college !== currUserCollege);
+
+  const home = '/';
+
 
   if (events.length === 0){
     return (
@@ -21,35 +29,51 @@ export default async function Home() {
     )
   }
   return (
+    
     <Container>
       <div>
         <FeaturedEvents/>
       </div>
-      <div className='mt-10 font-bold text-2xl'>Events in your college</div>
-      <div className='
-          pt-5
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          md:grid-cols-2
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-          gap-8
-      '>
-            {events.map((event: any) => {
-              return (
-                <>
-                  <EventCard
-                      currentUser = {currentUser}
-                      key={event.id}
-                      data ={event}
-                  />
-                    
-                </>
-                
-              )
-            })}
+      <div>
+        <PageHeader
+          title='Events in your college'
+          redirect={home}
+        />
+        <div className='
+            pt-5
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-2
+            lg:grid-cols-4
+            xl:grid-cols-5
+            2xl:grid-cols-6
+            gap-8
+        '>
+              {inMyCollege.map((event: any) => {
+                return (
+                  <>
+                    <EventCard
+                        currentUser = {currentUser}
+                        key={event.id}
+                        data ={event}
+                    />
+                      
+                  </>
+                  
+                )
+              })}
+        </div>
+      </div>
+      <div className=''>
+      <PageHeader
+          title='Events in other colleges'
+          redirect={home}
+        />
+        <div className='mt-8'>
+          <OtherCollegesFeatured/>
+        </div>
+        
       </div>
     </Container>
   )

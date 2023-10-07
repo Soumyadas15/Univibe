@@ -15,6 +15,9 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      custom: ['CustomFont', 'sans-serif'],
+    },
     extend: {
       keyframes: {
         "accordion-down": {

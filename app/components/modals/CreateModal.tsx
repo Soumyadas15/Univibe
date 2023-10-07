@@ -17,6 +17,8 @@ import dayjs from "dayjs";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { SafeUser } from "@/app/types";
+import { useUserStore } from "@/app/hooks/useCurrentUser";
 
 enum STEPS {
     DESCRIPTION = 0,
@@ -26,13 +28,22 @@ enum STEPS {
     DATE = 4,
 }
 
-const CreateModal = () => {
+interface CreateModalProps {
+    currentUser?: SafeUser | null;
+}
+
+const CreateModal: React.FC<CreateModalProps> = ({
+    currentUser,
+}) => {
     const createModal = useCreateModal();
     const successModal = useSuccessModal();
     const confettiStore = useConfettiStore();
     const [setDate, useSetDate] = useState(null);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    
+    const userName = currentUser ? currentUser.institute : 'College not found';
+    const userCollege = currentUser?.institute;
 
     const [step, setStep] = useState(STEPS.DESCRIPTION);
 
@@ -84,12 +95,11 @@ const CreateModal = () => {
         successModal.onOpen();
     }
 
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         if (step !== STEPS.DATE){
             return onNext();
         }
-        console.log(data);
-        setIsLoading(true);
         
         axios.post('/api/events', data)
         .then(() => {

@@ -9,6 +9,7 @@ import moment from 'moment';
 import useCountries from "@/app/hooks/useCountries";
 import { 
   
+  SafeEvent,
   SafeUser 
 } from "@/app/types";
 
@@ -18,7 +19,7 @@ import { Event, Registration } from "@prisma/client";
 import HeartButton from "../HeartButton";
 
 interface ListingCardProps {
-  data: Event;
+  data: SafeEvent;
   registration?: Registration;
   onAction?: (id: string) => void;
   disabled?: boolean;
@@ -85,6 +86,7 @@ const EventCard: React.FC<ListingCardProps> = ({
               group-hover:scale-110 
               transition
             "
+            // @ts-ignore
             src={data.imageSrc}
             alt="Listing"
           />

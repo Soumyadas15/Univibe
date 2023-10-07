@@ -20,6 +20,7 @@ import useWelcomeModal from "@/app/hooks/useWelcomeModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import CollegeSelect, { CollegeSelectValues } from "../inputs/CollegeSelect";
 import useEmailModal from "@/app/hooks/useEmailModal";
+import { sendMail } from "@/app/utils/mailSender";
 
 
 const RegisterModal= () => {
@@ -68,7 +69,7 @@ const RegisterModal= () => {
     axios.post('/api/register', data)
     .then(() => {
       registerModal.onClose();
-      welcomeModal.onOpen();
+      emailModal.onOpen();
     })
     .catch((error) => {
     
@@ -77,6 +78,7 @@ const RegisterModal= () => {
     .finally(() => {
       setIsLoading(false);
     })
+    
   }
 
   const bodyContent = (
