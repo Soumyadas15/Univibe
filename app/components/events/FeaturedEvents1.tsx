@@ -1,5 +1,8 @@
+"use client"
+
 import { SafeEvent } from "@/app/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface FeaturedEvents1Props {
@@ -13,8 +16,9 @@ const FeaturedEvents1: React.FC<FeaturedEvents1Props> = ({
     college,
     image
 }) => {
+    const router = useRouter();
     return ( 
-        <div>
+        <div onClick={() => {}}>
             <div className='
                 col-span-1 
                 cursor-pointer 

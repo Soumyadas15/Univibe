@@ -8,16 +8,23 @@ import animationData from '../../../public/assets/animation_ln457zq4.json'
 import { useConfettiStore } from "@/app/hooks/useConfettiStore";
 import useSuccessModal from "@/app/hooks/useSuccessModal";
 import useLikesModal from "@/app/hooks/useLikesModal";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Likes from "../Likes";
+import { SafeEvent, SafeUser } from "@/app/types";
+import getUserById from "@/app/actions/getUserById";
 
 interface LikesModalProps {
-    likedBy: String[],
+    user?: SafeUser,
+    event: SafeEvent,
 }
+
 const LikesModal: React.FC<LikesModalProps> = ({
-    likedBy,
+    user,
+    event,
 }) => {
     const likesModal = useLikesModal();
+    let likedBy = [...(event?.likedBy || [])];
+
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -25,7 +32,16 @@ const LikesModal: React.FC<LikesModalProps> = ({
                 title='People who are interested'
                 center
             />
-            
+            <div>
+            <h3>Liked By:</h3>
+            <ul>
+                {likedBy?.map((item, index) => (
+                    <li key={index}>
+                        {item}
+                    </li>
+                ))}
+            </ul>
+        </div>
         </div>
     )
 

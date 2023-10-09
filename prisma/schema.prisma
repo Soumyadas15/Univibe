@@ -73,6 +73,7 @@ model Event {
   college   String?
   likedBy     String[] @db.ObjectId
   userId String @db.ObjectId
+  
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   registrations Registration[]

@@ -2,6 +2,7 @@ import getEventById from "@/app/actions/getEventById";
 import EmptyState from "@/app/components/EmptyState";
 import EventClient from "./EventClient";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import getUserById from "@/app/actions/getUserById";
 
 interface IParams {
     eventId?: string;

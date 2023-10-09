@@ -7,6 +7,7 @@ import getCurrentUser from './actions/getCurrentUser';
 import FeaturedEvents from './components/events/FeaturedEvents';
 import OtherCollegesFeatured from './components/events/OtherCollegesFeatured';
 import PageHeader from './components/events/PageHeader';
+import getUserById from './actions/getUserById';
 
 export default async function Home() {
   const events = await getEvents();
@@ -32,6 +33,7 @@ export default async function Home() {
     
     <Container>
       <div>
+
         <FeaturedEvents/>
       </div>
       <div>

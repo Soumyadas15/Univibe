@@ -5,11 +5,12 @@ import Container from "@/app/components/Container";
 import EventDateInfo from "@/app/components/events/EventDateInfo";
 import EventHead from "@/app/components/events/EventHead";
 import EventInfo from "@/app/components/events/EventInfo";
+import useEventRegistrationModal from "@/app/hooks/useEventRegistrationModal";
 import { SafeEvent, SafeUser } from "@/app/types";
 import { categories } from "@/app/utils/categories";
 import { Registration } from "@prisma/client"
 import moment from "moment";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 interface EventClientProps {
     registrations?: Registration[];
@@ -32,6 +33,13 @@ const EventClient: React.FC<EventClientProps> = ({
     const [month, day, year] = formattedDate.split(' ');
     const abbreviatedMonth = month.substring(0, 3);
     const trimmedDay = day.slice(0, -1);
+
+    const eventRegistrationModal = useEventRegistrationModal();
+
+    const handleOpen = () => {
+        console.log('clicked');
+        eventRegistrationModal.onOpen();
+    }
 
     const category = useMemo(() => {
         return categories.find((item) => 
@@ -85,10 +93,12 @@ const EventClient: React.FC<EventClientProps> = ({
                                 //@ts-ignore
                                 department={event.department}
                             />
+                            <div onClick={handleOpen}>
                             <Button
-                                label="Register"
+                                label={event.id}
                                 onClick={() => {}}
                             />
+                            </div>
                         </div>
                     </div>
                 </div>

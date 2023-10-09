@@ -7,8 +7,10 @@ const Likes: React.FC<LikesProps> = ({ likedBy }) => {
         <div>
             <h3>Liked By:</h3>
             <ul>
-                {likedBy.map((item, index) => (
-                    <li key={index}>{item}</li>
+                {likedBy?.map((item, index) => (
+                    <li key={index}>
+                        {item}
+                    </li>
                 ))}
             </ul>
         </div>

@@ -35,6 +35,7 @@ export default async function OtherCollegesFeatured() {
                 image={event1?.imageSrc}
             />
             <FeaturedEvents1
+                
                 title={event2.title}
                 college={event2?.college}
                 image={event2?.imageSrc}
