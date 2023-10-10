@@ -73,6 +73,10 @@ const EventClient: React.FC<EventClientProps> = ({
                         // @ts-ignore
                         description={event.description}
                         likedBy={likedBy}
+                        //@ts-ignore
+                        team={event?.team}
+                        //@ts-ignore
+                        members={event.memberCount}
                     />
                     <div
                         className='
@@ -95,7 +99,7 @@ const EventClient: React.FC<EventClientProps> = ({
                             />
                             <div onClick={handleOpen}>
                             <Button
-                                label={event.id}
+                                label='Register'
                                 onClick={() => {}}
                             />
                             </div>

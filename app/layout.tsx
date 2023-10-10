@@ -8,6 +8,7 @@ import { ConfettiProvider } from '@/app/providers/ConfettiProvider'
 import ToasterProvider from './providers/ToasterProvider'
 import getCurrentUser from './actions/getCurrentUser'
 import ModalProvider from './providers/ModalProvider'
+import LocoScroll from './components/LocoScroll'
 
 const font = Montserrat({ subsets: ['latin'] })
 
@@ -30,21 +31,23 @@ export default async function RootLayout({
           font.className,
           "bg-white dark:bg-neutral-900"
       )}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='light'
-          enableSystem = {false}
-          storageKey='univibe-key'
-          
-        >
-          <ToasterProvider />
-          <ConfettiProvider />
-          <Navbar currentUser = {currentUser} />
-          <ModalProvider/>
-          <div className='pb-20 pt-28'>
-            {children}
-          </div>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='light'
+            enableSystem = {false}
+            storageKey='univibe-key'
+            
+          >
+            <ToasterProvider />
+            <ConfettiProvider />
+            <Navbar currentUser = {currentUser} />
+            <ModalProvider/>
+            <div className='pb-20 pt-28'>
+              <LocoScroll>
+                {children}
+              </LocoScroll>
+            </div>
+          </ThemeProvider>
       </body>
     </html>
   )

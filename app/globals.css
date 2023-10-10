@@ -14,7 +14,26 @@ body,
     font-style: normal;
   }
 
-  .your-class-name {
-    font-family: 'CustomFont', sans-serif;
-    /* other styles */
-  }
+.your-class-name {
+  font-family: 'CustomFont', sans-serif;
+  /* other styles */
+}
+
+.without-ring {
+  @apply focus:ring-0 focus:ring-offset-0;
+}
+
+.number-input {
+  /* Remove arrows for number input */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* For Firefox, override the number input's spinner */
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+

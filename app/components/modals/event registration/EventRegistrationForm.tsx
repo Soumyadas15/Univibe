@@ -141,8 +141,8 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     let bodyContent = (
         <div className="flex flex-col gap-8">
                 <Heading
-                    title='Event details'
-                    subtitle='Add a title and a description'
+                    title='Your details'
+                    subtitle='These details will be sent to the organizers'
                 />
                 <Input
                     id='title'

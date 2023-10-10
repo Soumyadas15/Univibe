@@ -71,6 +71,8 @@ model Event {
   date      DateTime? @default(now())
   venue     String?
   college   String?
+  team   Boolean? @default(false)
+  memberCount Int?
   likedBy     String[] @db.ObjectId
   userId String @db.ObjectId
   

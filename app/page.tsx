@@ -8,6 +8,8 @@ import FeaturedEvents from './components/events/FeaturedEvents';
 import OtherCollegesFeatured from './components/events/OtherCollegesFeatured';
 import PageHeader from './components/events/PageHeader';
 import getUserById from './actions/getUserById';
+import { useEffect } from 'react';
+import LocoScroll from './components/LocoScroll';
 
 export default async function Home() {
   const events = await getEvents();
@@ -20,7 +22,6 @@ export default async function Home() {
 
   const home = '/';
 
-
   if (events.length === 0){
     return (
       <div>
@@ -30,7 +31,6 @@ export default async function Home() {
     )
   }
   return (
-    
     <Container>
       <div>
 

@@ -19,13 +19,17 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { SafeUser } from "@/app/types";
 import { useUserStore } from "@/app/hooks/useCurrentUser";
+import Counter from "../inputs/Counter";
+import Checkbox from "../inputs/Checkbox";
+import { motion } from 'framer-motion';
 
 enum STEPS {
     DESCRIPTION = 0,
     CATEGORY = 1,
     IMAGES = 2,
     INFO = 3,
-    DATE = 4,
+    MEMBERS = 4,
+    DATE = 5,
 }
 
 interface CreateModalProps {
@@ -62,6 +66,8 @@ const CreateModal: React.FC<CreateModalProps> = ({
             department: '',
             venue: '',
             imageSrc: '',
+            team: false,
+            memberCount: 1,
             title: '',
             description: '',
             date: '',
@@ -74,6 +80,8 @@ const CreateModal: React.FC<CreateModalProps> = ({
     };
 
     const category = watch('category');
+    const memberCount = watch('memberCount');
+    const team = watch('team');
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -82,6 +90,13 @@ const CreateModal: React.FC<CreateModalProps> = ({
             shouldTouch: true,
         })
     }
+
+    const handleTeamCheckboxChange = (value: boolean) => {
+        setCustomValue('team', value);
+        if (!value) {
+            setCustomValue('memberCount', 1); 
+        }
+    };
     
     const onBack = () => {
         setStep((value) => value - 1);
@@ -100,6 +115,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
         if (step !== STEPS.DATE){
             return onNext();
         }
+        setIsLoading(true);
         
         axios.post('/api/events', data)
         .then(() => {
@@ -137,58 +153,81 @@ const CreateModal: React.FC<CreateModalProps> = ({
 
     let bodyContent = (
         <div className="flex flex-col gap-8">
+            <motion.div
+                    key="categories"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3 }}
+            >
+                <div className="flex flex-col gap-8">
                 <Heading
                     title='Event details'
                     subtitle='Add a title and a description'
-                />
-                <Input
-                    id='title'
-                    label='Title'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
+                    center
                 />
                 
-                <Input
-                    id='description'
-                    label='Description'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
-            </div>
+                    <Input
+                        id='title'
+                        label='Title'
+                        disabled={false}
+                        register={register}
+                        errors={errors}
+                        required
+                    />
+                    
+                    <Input
+                        id='description'
+                        label='Description'
+                        disabled={false}
+                        register={register}
+                        errors={errors}
+                        required
+                    />
+                </div>
+            </motion.div>
+        </div>
     )
 
     if (step === STEPS.CATEGORY){
         bodyContent = (
-            <div className="flex flex-col gap-8">
-            <Heading
-                title='Which of these best describes the event?'
-                subtitle="Pick a category"
-                center
-            />
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    md:grid-cols-2
-                    gap-3
-                    max-h-[50vh]
-                    overflow-y-auto
-                "
-            >
-                {categories.map((item) => (
-                    <div key={item.label} className="col-span-1">
-                        <CategoryInput
-                            onClick={(category) => {setCustomValue('category', category)}}
-                            selected={category === item.label}
-                            label={item.label}
-                            icon={item.icon}
-                        />
+            <div className="object-fit">
+                
+                <div className="flex flex-col gap-8">
+                <Heading
+                    title='Which of these best describes the event?'
+                    subtitle="Pick a category"
+                    center
+                />
+                <motion.div
+                    key="categories"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div
+                        className="
+                            grid
+                            grid-cols-1
+                            md:grid-cols-2
+                            gap-3
+                            max-h-[50vh]
+                            overflow-y-auto
+                        "
+                    >
+                        {categories.map((item) => (
+                            <div key={item.label} className="col-span-1">
+                                <CategoryInput
+                                    onClick={(category) => {setCustomValue('category', category)}}
+                                    selected={category === item.label}
+                                    label={item.label}
+                                    icon={item.icon}
+                                />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </motion.div>
             </div>
         </div>
         )
@@ -201,11 +240,20 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     subtitle="Pick a category"
                     center
                 />
-                <ImageUpload
-                    value={imageSrc}
-                    onChange={(value) => setCustomValue('imageSrc', value)}
-                />
+                <motion.div
+                    key="images"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <ImageUpload
+                        value={imageSrc}
+                        onChange={(value) => setCustomValue('imageSrc', value)}
+                    />
+                </motion.div>
             </div>
+            
         )
     }
     if (step === STEPS.INFO){
@@ -216,25 +264,76 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     subtitle="Add some more details"
                     center
                 />
-                <Input
-                    id='department'
-                    label='Department'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
-                <Input
-                    id='venue'
-                    label='Venue'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
+            
+                    <div className="flex flex-col gap-8">
+                    <motion.div
+                        key="info"
+                        initial={{ opacity: 0, x: "-50%" }}
+                        animate={{ opacity: 1, x: "0%" }}
+                        exit={{ opacity: 0, x: "100%" }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div className="flex flex-col gap-8">
+                        <Input
+                            id='department'
+                            label='Department'
+                            disabled={false}
+                            register={register}
+                            errors={errors}
+                            required
+                        />
+                        <Input
+                            id='venue'
+                            label='Venue'
+                            disabled={false}
+                            register={register}
+                            errors={errors}
+                            required
+                        />
+                        </div>
+                    </motion.div>
+                    </div>
             </div>
         )
     }
+
+    if (step === STEPS.MEMBERS){
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title='Member info'
+                    subtitle="Is this a team event?"
+                    center
+                />
+                <div className="flex flex-col gap-8">
+                <motion.div
+                    key="members"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="flex flex-col gap-8">
+                        <Checkbox
+                            title="Team event"
+                            value = {team}
+                            onChange={handleTeamCheckboxChange}
+                        />
+                        <hr className="border-t-1" />
+                        <Counter
+                            onChange={(value) => setCustomValue('memberCount', value)}
+                            value={memberCount}
+                            disabled={!team}
+                            title="Member count" 
+                            subtitle="How many members should teams consist?"
+                        />
+                    </div>
+                </motion.div>
+                </div>
+            </div>
+        )
+    }
+
     if (step === STEPS.DATE){
         bodyContent = (
             <div className="flex flex-col gap-8">
@@ -243,12 +342,20 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     subtitle="Pick a category"
                     center
                 />
-                <div className="flex items-center justify-center">
-                    <DatePicker
-                        onClick={() => {}}
-                        onSelectDate={handleDateSelect}
-                    />
-                </div>
+                <motion.div
+                    key="calender"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="flex items-center justify-center">
+                        <DatePicker
+                            onClick={() => {}}
+                            onSelectDate={handleDateSelect}
+                        />
+                    </div>
+                </motion.div>
                 
             </div>
         )

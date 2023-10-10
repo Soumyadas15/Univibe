@@ -20,6 +20,8 @@ interface EventInfoProps {
     label: string;
     description: string;
   } | undefined,
+  team?: boolean,
+  members?: number,
   likedBy: String[],
 }
 
@@ -27,6 +29,8 @@ const EventInfo: React.FC<EventInfoProps> = ({
   user,
   description,
   category,
+  team,
+  members,
   likedBy,
 }) => {
 
@@ -69,6 +73,8 @@ const EventInfo: React.FC<EventInfoProps> = ({
           icon={category.icon} 
           label={category?.label}
           description={category?.description} 
+          team={team}
+          members={members}
         />
       )}
       <hr className="border-t-1 border-neutral-700" />

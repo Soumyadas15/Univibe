@@ -19,6 +19,7 @@ import CategoryInput from "@/app/components/inputs/CategoryInput";
 import ImageUpload from "@/app/components/inputs/ImageUpload";
 import DatePicker from "@/app/components/inputs/DatePicker";
 import Modal from "@/app/components/modals/Modal";
+import NumberInput from "@/app/components/inputs/NumberInput";
 
 enum STEPS {
     DESCRIPTION = 0,
@@ -142,21 +143,22 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     let bodyContent = (
         <div className="flex flex-col gap-8">
                 <Heading
-                    title='Event details'
-                    subtitle='Add a title and a description'
+                    title='Your details'
+                    subtitle='These will be sent to organizers'
+                    center
                 />
                 <Input
-                    id='title'
-                    label='Title'
+                    id='name'
+                    label='Name'
                     disabled={false}
                     register={register}
                     errors={errors}
                     required
                 />
                 
-                <Input
-                    id='description'
-                    label='Description'
+                <NumberInput
+                    id='phone'
+                    label='Phone number'
                     disabled={false}
                     register={register}
                     errors={errors}

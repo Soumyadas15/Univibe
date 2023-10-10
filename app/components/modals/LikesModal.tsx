@@ -12,10 +12,14 @@ import React, { useEffect, useState } from "react";
 import Likes from "../Likes";
 import { SafeEvent, SafeUser } from "@/app/types";
 import getUserById from "@/app/actions/getUserById";
+import LogName from "../LogName";
 
 interface LikesModalProps {
     user?: SafeUser,
     event: SafeEvent,
+}
+interface User {
+    name: string | null;
 }
 
 const LikesModal: React.FC<LikesModalProps> = ({
@@ -24,6 +28,22 @@ const LikesModal: React.FC<LikesModalProps> = ({
 }) => {
     const likesModal = useLikesModal();
     let likedBy = [...(event?.likedBy || [])];
+    const [likedUsers, setLikedUsers] = useState<User[]>([]);
+    const [userName, setUserName] = useState('Hey');
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const name = await LogName();
+            console.log("LOL")
+            console.log(name);
+          } catch (error) {
+            console.error("Error fetching user:", error);
+          }
+        };
+    
+        fetchData();
+      }, []);
 
 
     const bodyContent = (
@@ -35,11 +55,11 @@ const LikesModal: React.FC<LikesModalProps> = ({
             <div>
             <h3>Liked By:</h3>
             <ul>
-                {likedBy?.map((item, index) => (
-                    <li key={index}>
-                        {item}
-                    </li>
-                ))}
+            {likedBy.map((user, index) => (
+                        <li key={index}>
+                            {user}
+                        </li>
+                    ))}
             </ul>
         </div>
         </div>
