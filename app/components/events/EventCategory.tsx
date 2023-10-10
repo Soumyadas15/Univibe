@@ -42,7 +42,7 @@ const EventCategory: React.FC<EventCategoryProps> = ({
               <div className="flex flex-row items-center gap-4">
                 <Users2 size={40} className="text-[#ff297f]" />
                 <div className="flex flex-col">
-                  <div className="text-lg font-semibold">{members}</div>
+                  <div className="text-lg font-semibold">{members} members</div>
                   <div className="font-light">This is a team event</div>
                 </div>
               </div>

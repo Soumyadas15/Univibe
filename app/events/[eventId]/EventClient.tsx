@@ -6,6 +6,7 @@ import EventDateInfo from "@/app/components/events/EventDateInfo";
 import EventHead from "@/app/components/events/EventHead";
 import EventInfo from "@/app/components/events/EventInfo";
 import useEventRegistrationModal from "@/app/hooks/useEventRegistrationModal";
+import useIncompleteModal from "@/app/hooks/useIncompleteModal";
 import { SafeEvent, SafeUser } from "@/app/types";
 import { categories } from "@/app/utils/categories";
 import { Registration } from "@prisma/client"
@@ -35,10 +36,11 @@ const EventClient: React.FC<EventClientProps> = ({
     const trimmedDay = day.slice(0, -1);
 
     const eventRegistrationModal = useEventRegistrationModal();
+    const incompleteModal = useIncompleteModal();
 
     const handleOpen = () => {
         console.log('clicked');
-        eventRegistrationModal.onOpen();
+        incompleteModal.onOpen();
     }
 
     const category = useMemo(() => {

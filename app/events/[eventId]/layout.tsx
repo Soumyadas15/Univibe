@@ -4,6 +4,7 @@ import LikesModal from "@/app/components/modals/LikesModal";
 import getUserById from "@/app/actions/getUserById";
 import Liked from "@/app/components/modals/Liked";
 import LocoScroll from "@/app/components/LocoScroll";
+import Incomplete from "@/app/components/modals/Incomplete";
 
 interface IParams {
     eventId?: string;
@@ -27,6 +28,7 @@ const MainLayout = async ({
                     //@ts-ignore
                     event={event}
                 />
+                <Incomplete/>
             </div>
             <main className="md:pl-[72px] h-full">
                 <LocoScroll>
