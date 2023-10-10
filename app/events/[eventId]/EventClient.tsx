@@ -5,6 +5,7 @@ import Container from "@/app/components/Container";
 import EventDateInfo from "@/app/components/events/EventDateInfo";
 import EventHead from "@/app/components/events/EventHead";
 import EventInfo from "@/app/components/events/EventInfo";
+import useCreateModal from "@/app/hooks/useCreateModal";
 import useEventRegistrationModal from "@/app/hooks/useEventRegistrationModal";
 import useIncompleteModal from "@/app/hooks/useIncompleteModal";
 import { SafeEvent, SafeUser } from "@/app/types";
@@ -37,6 +38,7 @@ const EventClient: React.FC<EventClientProps> = ({
 
     const eventRegistrationModal = useEventRegistrationModal();
     const incompleteModal = useIncompleteModal();
+    const createModal = useCreateModal();
 
     const handleOpen = () => {
         console.log('clicked');
@@ -99,7 +101,7 @@ const EventClient: React.FC<EventClientProps> = ({
                                 //@ts-ignore
                                 department={event.department}
                             />
-                            <div onClick={handleOpen}>
+                            <div>
                             <Button
                                 label='Register'
                                 onClick={() => {}}
