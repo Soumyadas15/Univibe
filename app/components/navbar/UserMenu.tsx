@@ -36,12 +36,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
         setIsOpen((value) => !value);
     }, []);
 
-    const handleOpen = () => {
-        confettiStore.onOpen();
-        emailModal.onOpen(); 
-        toast.success("Fuck me")
-    };
-
     const onCreate = useCallback(() => {
         if (!currentUser) {
             return loginModal.onOpen();
@@ -61,7 +55,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 <div 
                     onClick={onCreate}
                     className="
-                        hidden
+                        
                         md:block
                         text-sm
                         font-semibold
@@ -91,6 +85,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         rounded-full
                         cursor-pointer
                         transition
+                        
                     "
                 >
                     <Avatar/>

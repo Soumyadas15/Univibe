@@ -79,7 +79,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
       )}
       <hr className="border-t-1 border-neutral-700" />
       <div className="
-      text-lg font-light">
+      text-md dark:text-[#dadada] leading-8 font-light">
         {description}
       </div>
       

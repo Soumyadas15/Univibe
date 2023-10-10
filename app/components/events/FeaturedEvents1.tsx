@@ -9,16 +9,21 @@ interface FeaturedEvents1Props {
     title: string | null;
     college: string | null;
     image: string | null;
+    link: string | null;
 }
 
 const FeaturedEvents1: React.FC<FeaturedEvents1Props> = ({
     title,
     college,
-    image
+    image,
+    link,
 }) => {
     const router = useRouter();
+    const handleClick = () => {
+        router.push(`/events/${link}`)
+    }
     return ( 
-        <div onClick={() => {}}>
+        <div onClick={handleClick}>
             <div className='
                 col-span-1 
                 cursor-pointer 

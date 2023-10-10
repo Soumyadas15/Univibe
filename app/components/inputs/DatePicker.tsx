@@ -96,7 +96,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                                         .toDate()
                                         .toDateString() ===
                                         date.toDate().toDateString()
-                                        ? "bg-black text-white"
+                                        ? "bg-black text-white dark:bg-white dark:text-black"
                                         : "",
                                     
                                 )}

@@ -16,6 +16,7 @@ interface ModalProps {
     disabled?: boolean;
     secondaryAction?: () => void;
     secondaryActionLabel?: string;
+    noHide?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -27,6 +28,7 @@ const Modal: React.FC<ModalProps> = ({
     footer,
     actionLabel,
     disabled,
+    noHide,
     secondaryAction,
     secondaryActionLabel
 }) => {
@@ -156,12 +158,12 @@ const Modal: React.FC<ModalProps> = ({
                             </div>
                         </div>
                         {/* Body */}
-                        <div className='
+                        <div className={`
                                 relative 
                                 p-6 
                                 flex-auto 
-                                overflow-hidden
-                        '>
+                                ${noHide ? '' : 'overflow-hidden'}
+                        `}>
                             <div className='object-cover'>
                                 {body}
                             </div>

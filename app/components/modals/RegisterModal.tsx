@@ -156,6 +156,7 @@ const RegisterModal= () => {
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
+      noHide={true}
     />
   );
 }

@@ -112,20 +112,20 @@ const EventCard: React.FC<ListingCardProps> = ({
         )}
         <div className="flex justify-between">
             <div>
-                <div className="font-semibold text-lg">
+                <div className="font-semibold text-xl">
                         {data.title}
                 </div>
-                <div>
+                <div className="text-sm">
                     {data.venue}
                 </div>
             </div>
             <div>
-            <div className="flex text-center">
+            <div className="flex text-center gap-1">
                 <div>
-                    <div className="font-bold text-2xl">
+                    <div className="font-bold text-xl">
                         {trimmedDay}
                     </div>
-                    <div className="font-light text-lg">
+                    <div className="font-light text-sm">
                         {abbreviatedMonth}
                     </div>
                 </div>

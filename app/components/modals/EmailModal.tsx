@@ -68,8 +68,9 @@ const EmailModal = () => {
                 // subtitle= 'You have successfully signed up'
                 center
             />
+            
             <div className="flex items-center justify-center">
-                <Lottie animationData={animationData} className="h-[150px] w-[150px]"/>
+                <Lottie animationData={animationData} className="h-[300px] w-[300px] md:h-[150px] md:w-[150px]"/>
             </div>
             <Input
                 id="activationCode"
@@ -79,6 +80,7 @@ const EmailModal = () => {
                 errors={errors}
                 required
             />
+            
         </div>
     )
 
