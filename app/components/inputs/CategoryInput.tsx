@@ -1,6 +1,6 @@
 'use client';
 
-import { IconType } from "lucide-react";
+import { IconType } from "react-icons";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
