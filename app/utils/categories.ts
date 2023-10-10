@@ -1,19 +1,16 @@
-import { 
-    Lightbulb, 
-    Trophy,
-    PartyPopper,
-    Music,
-    Users2,
-    Drama,
-  
-} from 'lucide-react';
+import { HiOutlineLightBulb } from 'react-icons/hi';
+import { MdDirectionsRun } from 'react-icons/md';
+import { BiParty } from 'react-icons/bi';
+import { BsMusicNoteList } from 'react-icons/bs';
+import { FiUsers } from 'react-icons/fi';
+import { GiDramaMasks } from 'react-icons/gi';
 
-const quiz = Lightbulb;
-const sports = Trophy;
-const party = PartyPopper;
-const music = Music;
-const social = Users2;
-const culture = Drama;
+const quiz = HiOutlineLightBulb;
+const sports = MdDirectionsRun;
+const party = BiParty;
+const music = BsMusicNoteList;
+const social = FiUsers;
+const culture = GiDramaMasks;
 
 export const categories = [
     {
