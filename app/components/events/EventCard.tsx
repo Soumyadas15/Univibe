@@ -65,7 +65,16 @@ const EventCard: React.FC<ListingCardProps> = ({
   return (
     <div 
       onClick={() => router.push(`/events/${data.id}`)} 
-      className="col-span-1 cursor-pointer group  shadow-md dark:shadow-black p-3 rounded-lg"
+      className="
+          col-span-1 
+          cursor-pointer 
+          group 
+          shadow-md 
+          dark:shadow-transparent
+          dark:bg-[#1e1e1e] 
+          p-3 
+          rounded-lg
+      "
     >
       <div className="flex flex-col gap-2 w-full">
         <div 
@@ -111,11 +120,11 @@ const EventCard: React.FC<ListingCardProps> = ({
           />
         )}
         <div className="flex justify-between">
-            <div>
-                <div className="font-semibold text-xl">
+            <div className="flex flex-col gap-1">
+                <div className="font-semibold text-md text-[#ff297f]">
                         {data.title}
                 </div>
-                <div className="text-sm">
+                <div className="text-sm dark:text-[#adadad]">
                     {data.venue}
                 </div>
             </div>
