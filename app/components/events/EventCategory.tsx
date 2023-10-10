@@ -1,7 +1,7 @@
 'use client';
 
-import { Users2 } from "lucide-react";
 import { IconType } from "react-icons";
+import { FiUsers } from 'react-icons/fi';
 
 interface EventCategoryProps {
   icon: IconType,
@@ -40,7 +40,7 @@ const EventCategory: React.FC<EventCategoryProps> = ({
           <div className="border-black bg-black h-10"></div>
             <div className="flex flex-col gap-6">
               <div className="flex flex-row items-center gap-4">
-                <Users2 size={40} className="text-[#ff297f]" />
+                <FiUsers size={40} className="text-[#ff297f]" />
                 <div className="flex flex-col">
                   <div className="text-lg font-semibold">{members} members</div>
                   <div className="font-light">This is a team event</div>
