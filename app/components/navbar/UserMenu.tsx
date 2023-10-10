@@ -55,7 +55,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 <div 
                     onClick={onCreate}
                     className="
-                        
+                        hidden
                         md:block
                         text-sm
                         font-semibold

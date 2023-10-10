@@ -22,7 +22,7 @@ const Logo = () => {
             '>
             <Image 
                 alt = 'Logo'
-                className='hidden md:block cursor-pointer'
+                className='md:block cursor-pointer'
                 height = {36}
                 width = {36}
                 src = '/images/logo.png'
