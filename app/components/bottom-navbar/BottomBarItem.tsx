@@ -58,7 +58,7 @@ const BottomBarItem: React.FC<BottomBarItem> = ({
                         />
                     </div>
 
-                    <p className={`
+                    {/* <p className={`
                             
                             text-light-1 
                             max-sm:hidden
@@ -66,7 +66,7 @@ const BottomBarItem: React.FC<BottomBarItem> = ({
                             ${isActive ? 'text-yellow-400' : ''}
                         `}>
                         {label}
-                    </p>
+                    </p> */}
                 </div>
             </div>
      );

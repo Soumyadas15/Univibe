@@ -66,7 +66,7 @@ export default async function Home() {
           title='Events in other colleges'
           redirect={home}
         />
-        <div className='mt-8'>
+        <div className='mt-8 mb-8 md:mb-0'>
           <OtherCollegesFeatured/>
         </div>
         

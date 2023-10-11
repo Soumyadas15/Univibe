@@ -102,7 +102,7 @@ const EventClient: React.FC<EventClientProps> = ({
                                 //@ts-ignore
                                 department={event.department}
                             />
-                            <div>
+                            <div className="mb-7">
                             <Button
                                 label='Register'
                                 onClick={incompleteModal.onOpen}

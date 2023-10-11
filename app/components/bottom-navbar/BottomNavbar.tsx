@@ -60,11 +60,12 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                     md:hidden
             '>
             <div className='
-                            flex 
-                            items-center 
-                            justify-between 
-                            gap-3 
-                            xs:gap-5
+                    flex 
+                    items-center 
+                    justify-between 
+                    gap-3 
+                    xs:gap-5
+                    mb-7
                 '>
                 <BottomBarItem
                     icon={AiFillHome}
