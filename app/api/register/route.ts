@@ -46,8 +46,7 @@ export async function POST(
     });
 
     const emailSubject = 'Welcome to Univibe';
-    const emailText = `Hello ${name}! I'm very happy to have you onboard! 
-                        Your activation code is ${code}`
+    const emailText = `Hello ${name}! I'm very happy to have you onboard! Your activation code is ${code}`
 
     await sendMail(emailSubject, email, emailText);
 

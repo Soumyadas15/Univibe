@@ -13,55 +13,56 @@ import Likes from "../Likes";
 import { SafeEvent, SafeUser } from "@/app/types";
 import getUserById from "@/app/actions/getUserById";
 import LogName from "../LogName";
+import Image from "next/image";
+import Avatar from "../navbar/Avatar";
+import { categories } from "@/app/utils/categories";
+import CategoryInput from "../inputs/CategoryInput";
 
 interface LikesModalProps {
-    user?: SafeUser,
-    event: SafeEvent,
-}
-interface User {
-    name: string | null;
+    likedBy: SafeUser[],
 }
 
 const LikesModal: React.FC<LikesModalProps> = ({
-    user,
-    event,
+    likedBy,
 }) => {
     const likesModal = useLikesModal();
-    let likedBy = [...(event?.likedBy || [])];
-    const [likedUsers, setLikedUsers] = useState<User[]>([]);
-    const [userName, setUserName] = useState('Hey');
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const name = await LogName();
-            console.log("LOL")
-            console.log(name);
-          } catch (error) {
-            console.error("Error fetching user:", error);
-          }
-        };
-    
-        fetchData();
-      }, []);
 
 
     const bodyContent = (
-        <div className='flex flex-col gap-4'>
-            <Heading
-                title='People who are interested'
-                center
-            />
-            <div>
-            <h3>Liked By:</h3>
-            <ul>
-            {likedBy.map((user, index) => (
-                        <li key={index}>
-                            {user}
-                        </li>
-                    ))}
-            </ul>
-        </div>
+        <div className="object-fit">
+                
+                <div className="flex flex-col gap-8">
+                <Heading
+                    title='People who are interested'
+                    center
+                />
+                <div className="flex flex-col gap-6">
+                    <div className="font-semibold">Liked by</div>
+                    <hr className="border-t-1"/>
+                    <div
+                        className="
+                            grid
+                            grid-cols-1
+                            md:grid-cols-1
+                            gap-3
+                            max-h-[50vh]
+                            overflow-y-auto
+                        "
+                    >
+                        {likedBy.map((user, index) => (
+                                <div key={index} className="">
+                                <div className="flex gap-2 items-center">
+                                        <Avatar/>
+                                        <div>
+                                            {user?.name}
+                                        </div>
+                                </div>
+                                </div>
+                        ))}
+                        
+                        </div>
+                </div>
+            </div>
         </div>
     )
 
@@ -74,6 +75,7 @@ const LikesModal: React.FC<LikesModalProps> = ({
                 onClose={likesModal.onClose}
                 onSubmit={likesModal.onClose}
                 body={bodyContent}
+                
             />
         </div>
      );

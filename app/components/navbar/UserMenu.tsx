@@ -132,6 +132,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 <motion.div
                     initial="hidden"
                     animate="visible"
+                    exit='exit'
                     variants={dropdownVariants}
                 >
                 <div
