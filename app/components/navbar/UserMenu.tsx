@@ -15,6 +15,27 @@ import { SafeUser } from "@/app/types";
 import toast from "react-hot-toast";
 import useEmailModal from "@/app/hooks/useEmailModal";
 import useCreateModal from "@/app/hooks/useCreateModal";
+import { motion } from 'framer-motion';
+
+const dropdownVariants = {
+    hidden: { 
+        opacity: 0, 
+    },
+    visible: { 
+        opacity: 1, 
+        transition: { 
+            duration: 0.2,
+            ease: "easeInOut",
+        } 
+    },
+    exit: {
+        opacity: 0,
+        transition: { 
+            duration: 0.2,
+            ease: "easeInOut",
+        } 
+    }
+};
 
 interface UserMenuProps {
     currentUser?: SafeUser | null;
@@ -34,6 +55,21 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
+    }, []);
+
+    const addEventToggle = useCallback(() => {
+        createModal.onOpen();
+        setIsOpen(false);
+    }, []);
+
+    const loginToggle = useCallback(() => {
+        loginModal.onOpen();
+        setIsOpen(false);
+    }, []);
+
+    const signUpToggle = useCallback(() => {
+        registerModal.onOpen();
+        setIsOpen(false);
     }, []);
 
     const onCreate = useCallback(() => {
@@ -93,6 +129,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 <ModeToggle/>
             </div>
             {isOpen && (
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={dropdownVariants}
+                >
                 <div
                 className="
                     absolute 
@@ -114,42 +155,21 @@ const UserMenu: React.FC<UserMenuProps> = ({
                        
                     {currentUser ? (
                         <>
-                            <MenuItem 
-                                label="My favorites" 
-                                onClick={() => {}}
-                            />
-                            <MenuItem 
-                                label="My registrations" 
-                                onClick={() => {}}
-                            />
-                            <MenuItem 
-                                label="My events" 
-                                onClick={() => {}}
-                            />
-                            <MenuItem 
-                                label="Add event" 
-                                onClick={createModal.onOpen}
-                            />
-                            
-                            <MenuItem 
-                                label="Logout" 
-                                onClick={() => signOut()}
-                            />
+                            <MenuItem label="My favorites" onClick={() => {}} />
+                            <MenuItem label="My registrations" onClick={() => {}} />
+                            <MenuItem label="My events" onClick={() => {}} />
+                            <MenuItem label="Add event" onClick={addEventToggle} />
+                            <MenuItem label="Logout" onClick={() => signOut()} />
                         </>
                         ) : (
                         <>
-                            <MenuItem 
-                                label="Login" 
-                                onClick={loginModal.onOpen}
-                            />
-                            <MenuItem 
-                                label="Sign up" 
-                                onClick={registerModal.onOpen}
-                            />
+                            <MenuItem label="Login" onClick={loginToggle} />
+                            <MenuItem label="Sign up" onClick={signUpToggle} />
                         </>
                         )}
                     </div>
                 </div>
+                </motion.div>
             )}
         </div>
      );
