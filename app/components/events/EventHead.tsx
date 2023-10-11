@@ -30,7 +30,8 @@ const EventHead: React.FC<EventHeadProps> = ({
       />
       <div className="
           w-full
-          h-[60vh]
+          h-[40vh]
+          md:h-[60vh]
           overflow-hidden 
           rounded-xl
           relative
