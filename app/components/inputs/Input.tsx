@@ -65,6 +65,7 @@ const Input: React.FC<InputProps> = ({
                     transition
                     
                     disabled:opacity-70
+                    without-ring
                     disabled:cursor-not-allowed
                     ${formatPrice ? 'pl-9' : 'pl-4'}
                     ${errors[id] ? 'border-[#ff297f]' : 'border-neutral-500 dark:border-neutral-800'}
