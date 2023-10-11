@@ -9,6 +9,7 @@ import ToasterProvider from './providers/ToasterProvider'
 import getCurrentUser from './actions/getCurrentUser'
 import ModalProvider from './providers/ModalProvider'
 import LocoScroll from './components/LocoScroll'
+import BottomNavbar from './components/bottom-navbar/BottomNavbar'
 
 const font = Montserrat({ subsets: ['latin'] })
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
                 {children}
               </LocoScroll>
             </div>
+            <BottomNavbar/>
           </ThemeProvider>
       </body>
     </html>
