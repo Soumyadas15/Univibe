@@ -21,22 +21,17 @@ const MainLayout = async ({
 
     return ( 
         
-            <div className="h-full">
-            <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+            <main className="md:pl-[72px] h-full">
                 <EventRegiatrationModal currEvent={event}/>
                 <LikesModal 
                     //@ts-ignore
                     event={event}
                 />
                 <Incomplete/>
-            </div>
-            <main className="md:pl-[72px] h-full">
                 <LocoScroll>
                 {children}
                 </LocoScroll>
             </main>
-            </div>
-       
     );
 }
  

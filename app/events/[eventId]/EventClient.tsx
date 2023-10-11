@@ -85,13 +85,14 @@ const EventClient: React.FC<EventClientProps> = ({
                     <div
                         className='
                             order-last
-                            mb-10
+                            mt-6
+                            md:mt-0
                             md:order-last
                             md:col-span-3
                             
                         '
                     >
-                        <div className="flex flex-col gap-5">
+                        <div className="flex flex-col gap-6">
                             <EventDateInfo
                                 day={trimmedDay}
                                 month={abbreviatedMonth}
@@ -104,7 +105,7 @@ const EventClient: React.FC<EventClientProps> = ({
                             <div>
                             <Button
                                 label='Register'
-                                onClick={() => {}}
+                                onClick={incompleteModal.onOpen}
                             />
                             </div>
                         </div>
