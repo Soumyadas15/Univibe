@@ -156,10 +156,22 @@ const UserMenu: React.FC<UserMenuProps> = ({
                        
                     {currentUser ? (
                         <>
-                            <MenuItem label="My favorites" onClick={() => {}} />
-                            <MenuItem label="My registrations" onClick={() => {}} />
-                            <MenuItem label="My events" onClick={() => {}} />
-                            <MenuItem label="Add event" onClick={addEventToggle} />
+                            <div className="hidden md:block">
+                                <MenuItem label="My favorites" onClick={() => (router.push('/likes'))} />
+                            </div>
+
+                            <div className="hidden md:block">
+                                <MenuItem label="My registrations" onClick={() => (router.push('/bookings'))} />
+                            </div>
+
+                            <div className="hidden md:block">
+                                <MenuItem label="My events" onClick={() => (router.push('/my-events'))} />
+                            </div>
+
+                            <div className="hidden md:block">
+                                <MenuItem label="Add event" onClick={addEventToggle} />
+                            </div>
+                            
                             <MenuItem label="Logout" onClick={() => signOut()} />
                         </>
                         ) : (

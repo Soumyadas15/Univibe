@@ -48,7 +48,7 @@ export default async function RootLayout({
                 {children}
               </LocoScroll>
             </div>
-            <BottomNavbar/>
+            <BottomNavbar currentUser = {currentUser} />
           </ThemeProvider>
       </body>
     </html>
