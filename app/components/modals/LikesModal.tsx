@@ -17,6 +17,8 @@ import Image from "next/image";
 import Avatar from "../navbar/Avatar";
 import { categories } from "@/app/utils/categories";
 import CategoryInput from "../inputs/CategoryInput";
+import EmptyState from "../EmptyState";
+import EmptySignIn from "../EmptySignIn";
 
 interface LikesModalProps {
     likedBy: SafeUser[],
@@ -27,8 +29,7 @@ const LikesModal: React.FC<LikesModalProps> = ({
 }) => {
     const likesModal = useLikesModal();
 
-
-    const bodyContent = (
+    let bodyContent = (
         <div className="object-fit">
                 
                 <div className="flex flex-col gap-8">
@@ -65,6 +66,25 @@ const LikesModal: React.FC<LikesModalProps> = ({
             </div>
         </div>
     )
+
+    if (likedBy.length == 0){
+
+        bodyContent = (
+            <div className="object-fit">
+                    
+                    <div className="flex flex-col gap-8">
+                        <Heading
+                            title='People who are interested'
+                            center
+                        />
+                        <EmptySignIn
+                            title="No likes yet"
+                            subtitle=""
+                        />
+                </div>
+            </div>
+        )
+    }
 
     return ( 
         <div>
