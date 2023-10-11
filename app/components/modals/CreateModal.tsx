@@ -323,7 +323,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                             value = {team}
                             onChange={handleTeamCheckboxChange}
                         />
-                        <hr className="border-t-1" />
+                        <hr className="border-t-1 border-neutral-500 dark:border-neutral-800" />
                         <Counter
                             onChange={(value) => setCustomValue('memberCount', value)}
                             value={memberCount}

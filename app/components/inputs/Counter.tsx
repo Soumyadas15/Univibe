@@ -45,11 +45,11 @@ const Counter: React.FC<CounterProps> = ({
             ${disabled ? "opacity-40 cursor-not-allowed" : ""}
         `}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <div className="font-semibold">
             {title}
         </div>
-        <div className="font-light">
+        <div className="font-light text-[#181818] dark:text-[#d6d6d6]">
             {subtitle}
         </div>
       </div>

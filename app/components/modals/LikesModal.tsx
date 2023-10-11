@@ -39,7 +39,7 @@ const LikesModal: React.FC<LikesModalProps> = ({
                 />
                 <div className="flex flex-col gap-6">
                     <div className="font-semibold">Liked by</div>
-                    <hr className="border-t-1"/>
+                    <hr className="border-t-1 border-neutral-500 dark:border-neutral-800" />
                     <div
                         className="
                             grid
