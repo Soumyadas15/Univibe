@@ -9,6 +9,8 @@ interface CounterProps {
   value: number;
   disabled: boolean;
   onChange: (value: number) => void;
+  start: number;
+  end: number;
 }
 
 const Counter: React.FC<CounterProps> = ({
@@ -17,16 +19,18 @@ const Counter: React.FC<CounterProps> = ({
   value,
   disabled,
   onChange,
+  start,
+  end,
 }) => {
 
     const onAdd = useCallback(() => {
-        if (!disabled && value < 5) {
+        if (!disabled && value < end) {
           onChange(value + 1);
         }
       }, [onChange, value, disabled]);
     
       const onReduce = useCallback(() => {
-        if (!disabled && value > 1) {
+        if (!disabled && value > start) {
           onChange(value - 1);
         }
       }, [onChange, value, disabled]);
@@ -37,6 +41,7 @@ const Counter: React.FC<CounterProps> = ({
             flex-row 
             items-center 
             justify-between
+            select-none
             ${disabled ? "opacity-40 cursor-not-allowed" : ""}
         `}
     >
@@ -48,7 +53,13 @@ const Counter: React.FC<CounterProps> = ({
             {subtitle}
         </div>
       </div>
-      <div className="flex flex-row items-center gap-4">
+      <div className={`
+              flex 
+              flex-row 
+              items-center 
+              gap-4
+              ${disabled ? "cursor-not-allowed" : "cursor-pointer"}
+        `} >
         <div
           onClick={onReduce}
           className={`
@@ -61,10 +72,9 @@ const Counter: React.FC<CounterProps> = ({
             items-center
             justify-center
             text-[#ff297f]
-            ${disabled ? "cursor-not-allowed" : "cursor-pointer"}
-            hover:opacity-80
             transition
-            ${value <= 1 ? "cursor-not-allowed opacity-40 hover:opacity-40" : ""}
+            ${disabled ? "cursor-not-allowed" : ""}
+            ${value <= start ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:opacity-80"}
             
           `}
         >
@@ -91,10 +101,9 @@ const Counter: React.FC<CounterProps> = ({
             items-center
             justify-center
             text-[#ff297f]
-            ${disabled ? "cursor-not-allowed" : "cursor-pointer"}
-            hover:opacity-80
             transition
-            ${value >= 5 ? "cursor-not-allowed opacity-40 hover:opacity-40" : ""}
+            ${disabled ? "cursor-not-allowed" : ""}
+            ${value >= end ? "cursor-not-allowed opacity-40" : "hover:opacity-80 cursor-pointer"}
           `}
         >
           <AiOutlinePlus />

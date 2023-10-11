@@ -93,6 +93,9 @@ const CreateModal: React.FC<CreateModalProps> = ({
 
     const handleTeamCheckboxChange = (value: boolean) => {
         setCustomValue('team', value);
+        if (value) {
+            setCustomValue('memberCount', 2); 
+        }
         if (!value) {
             setCustomValue('memberCount', 1); 
         }
@@ -126,6 +129,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
         }) .finally(() => {
             setIsLoading(false);
         })
+        
     }
 
     const actionLabel = useMemo(() => {
@@ -237,7 +241,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
             <div className="flex flex-col gap-8">
                 <Heading
                     title='Add image'
-                    subtitle="Pick a category"
+                    subtitle="Upload event banner"
                     center
                 />
                 <motion.div
@@ -324,6 +328,8 @@ const CreateModal: React.FC<CreateModalProps> = ({
                             onChange={(value) => setCustomValue('memberCount', value)}
                             value={memberCount}
                             disabled={!team}
+                            start={2}
+                            end={5}
                             title="Member count" 
                             subtitle="How many members should teams consist?"
                         />
@@ -339,7 +345,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
             <div className="flex flex-col gap-8">
                 <Heading
                     title='Date'
-                    subtitle="Pick a category"
+                    subtitle="Add event date"
                     center
                 />
                 <motion.div

@@ -44,13 +44,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               rounded-md 
               border-2 
               p-20 
-              border-neutral-300
+
+              border-neutral-400
+              dark:border-neutral-800
+
               flex
               flex-col
               justify-center
               items-center
               gap-4
-              text-neutral-200
+              text-neutral-400
+              dark:text-neutral-600
             "
           >
             <ImagePlus
