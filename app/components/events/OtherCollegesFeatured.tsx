@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import getEvents from '@/app/actions/getEvents';
+import getEvents, { IEventParams } from '@/app/actions/getEvents';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import FeaturedEvents1 from './FeaturedEvents1';
-  
-export default async function OtherCollegesFeatured() {
+
+interface OtherCollegesFeaturedProps {
+    searchParams: IEventParams;
+}
+
+const OtherCollegesFeatured = async (
+    {searchParams} : OtherCollegesFeaturedProps,
+) => {
     const currentUser = await getCurrentUser();
-    const events = await getEvents();
+    const events = await getEvents(searchParams);
     const currUserCollege = currentUser?.institute;
 
     let notInMyCollege = events.filter((event) => event.college !== currUserCollege);
@@ -46,3 +52,5 @@ export default async function OtherCollegesFeatured() {
 
     );
 };
+
+export default OtherCollegesFeatured;

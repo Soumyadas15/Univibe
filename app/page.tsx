@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Container from './components/Container'
 import EmptyState from './components/EmptyState';
-import getEvents from './actions/getEvents';
+import getEvents, { IEventParams } from './actions/getEvents';
 import EventCard from './components/events/EventCard';
 import getCurrentUser from './actions/getCurrentUser';
 import FeaturedEvents from './components/events/FeaturedEvents';
@@ -12,8 +12,13 @@ import { useEffect } from 'react';
 import LocoScroll from './components/LocoScroll';
 import EmptySignIn from './components/EmptySignIn';
 
-export default async function Home() {
-  const events = await getEvents();
+interface HomeProps {
+  searchParams: IEventParams;
+}
+const Home = async ({ 
+  searchParams 
+} : HomeProps) => {
+  const events = await getEvents(searchParams);
   const currentUser = await getCurrentUser();
   const currUserCollege = currentUser?.institute;
   
@@ -35,7 +40,7 @@ export default async function Home() {
     <Container>
       <div>
 
-        <FeaturedEvents/>
+        <FeaturedEvents searchParams={searchParams}/>
       </div>
       <div>
         <PageHeader
@@ -67,10 +72,13 @@ export default async function Home() {
           redirect={home}
         />
         <div className='mt-8 mb-8 md:mb-0'>
-          <OtherCollegesFeatured/>
+          <OtherCollegesFeatured searchParams={searchParams}/>
         </div>
         
       </div>
     </Container>
   )
 }
+
+export const dynamic = 'force-dynamic';
+export default Home;

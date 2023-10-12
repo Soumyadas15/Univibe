@@ -162,7 +162,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     initial={{ opacity: 0, x: "-50%" }}
                     animate={{ opacity: 1, x: "0%" }}
                     exit={{ opacity: 0, x: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <div className="flex flex-col gap-8">
                 <Heading
@@ -206,9 +206,9 @@ const CreateModal: React.FC<CreateModalProps> = ({
                 <motion.div
                     key="categories"
                     initial={{ opacity: 0, x: "-50%" }}
-                    animate={{ opacity: 1, x: "0%" }}
+                    animate={{ opacity: 1, x: "0%"  }}
                     exit={{ opacity: 0, x: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                     <div
                         className="
@@ -249,7 +249,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     initial={{ opacity: 0, x: "-50%" }}
                     animate={{ opacity: 1, x: "0%" }}
                     exit={{ opacity: 0, x: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                     <ImageUpload
                         value={imageSrc}
@@ -274,8 +274,8 @@ const CreateModal: React.FC<CreateModalProps> = ({
                         key="info"
                         initial={{ opacity: 0, x: "-50%" }}
                         animate={{ opacity: 1, x: "0%" }}
-                        exit={{ opacity: 0, x: "100%" }}
-                        transition={{ duration: 0.3 }}
+                        exit={{ opacity: 0, x: "100%"}}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                         <div className="flex flex-col gap-8">
                         <Input
@@ -315,7 +315,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     initial={{ opacity: 0, x: "-50%" }}
                     animate={{ opacity: 1, x: "0%" }}
                     exit={{ opacity: 0, x: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                     <div className="flex flex-col gap-8">
                         <Checkbox
@@ -353,7 +353,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     initial={{ opacity: 0, x: "-50%" }}
                     animate={{ opacity: 1, x: "0%" }}
                     exit={{ opacity: 0, x: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                     <div className="flex items-center justify-center">
                         <DatePicker

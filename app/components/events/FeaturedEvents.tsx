@@ -1,15 +1,20 @@
 
 
 import React, { useState, useEffect } from 'react';
-import getEvents from '@/app/actions/getEvents';
+import getEvents, { IEventParams } from '@/app/actions/getEvents';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Slideshow from './Slideshow';
 
+interface FeaturedEventsProps {
+    searchParams: IEventParams;
+}
 
-export default async function FeaturedEvents() {
+const FeaturedEvents = async (
+    { searchParams } : FeaturedEventsProps
+) => {
 
-    const events = await getEvents();
+    const events = await getEvents(searchParams);
     const sing = events[0];
     const images = sing ? sing.imageSrc : [];
 
@@ -45,3 +50,5 @@ export default async function FeaturedEvents() {
 
     );
 };
+
+export default FeaturedEvents;
