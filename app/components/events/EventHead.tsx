@@ -50,10 +50,6 @@ const EventHead: React.FC<EventHeadProps> = ({
             right-5
           "
         >
-          <HeartButton 
-            eventId={id}
-            currentUser={currentUser}
-          />
         </div>
       </div>
     </>

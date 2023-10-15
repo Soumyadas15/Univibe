@@ -33,6 +33,9 @@ const BottomBarItem: React.FC<BottomBarItem> = ({
         if(link){
             router.push(link);
         }
+        if ("vibrate" in navigator) {
+            navigator.vibrate(100);
+        }
     }
 
     return ( 

@@ -79,6 +79,8 @@ const EventClient: React.FC<EventClientProps> = ({
                         likedBy={likedBy}
                         //@ts-ignore
                         team={event?.team}
+                        id={event.id}
+                        currentUser={currentUser}
                         //@ts-ignore
                         members={event.memberCount}
                     />

@@ -10,6 +10,7 @@ import Avatar from "@/app/components/navbar/Avatar";
 import EventCategory from "./EventCategory";
 import useLikesModal from "@/app/hooks/useLikesModal";
 import useLikes from "@/app/hooks/Likes";
+import HeartButton from "../HeartButton";
 
 
 interface EventInfoProps {
@@ -23,6 +24,8 @@ interface EventInfoProps {
   team?: boolean,
   members?: number,
   likedBy: String[],
+  id: string;
+  currentUser?: SafeUser | null;
 }
 
 const EventInfo: React.FC<EventInfoProps> = ({
@@ -32,6 +35,8 @@ const EventInfo: React.FC<EventInfoProps> = ({
   team,
   members,
   likedBy,
+  id,
+  currentUser,
 }) => {
 
     const likes = useLikes();
@@ -40,32 +45,43 @@ const EventInfo: React.FC<EventInfoProps> = ({
     let len = likedBy.length;
   return ( 
     <div className="col-span-4 flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <div 
-          className="
-            text-xl 
-            font-semibold 
-            flex 
-            flex-row 
-            items-center
-            gap-2
-          "
-        >
-          <div className="">Created by {user?.name}</div>
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2">
+          <div 
+            className="
+              text-xl 
+              font-semibold 
+              flex 
+              flex-row 
+              items-center
+              gap-2
+            "
+          >
+            <div className="">Created by {user?.name}</div>
 
-          <Avatar 
-           // @ts-ignore
-            src={user?.image} 
-          />
+            <Avatar 
+            // @ts-ignore
+              src={user?.image} 
+            />
+          </div>
+          <div
+              className="flex gap-2 cursor-default"
+          >
+              <span className="font-bold">{len}</span> 
+              people interested
+              <div
+                  className="text-blue-600 dark:text-blue-400 hover:opacity-75 cursor-pointer"
+                  onClick={likesModal.onOpen}
+              >
+                view
+              </div>
+          </div>
         </div>
-        <div
-            className="flex gap-2 cursor-pointer"
-            onClick={likesModal.onOpen}
-        >
-            <span className="font-bold">{len}</span> 
-            people interested
-
-        </div>
+        <HeartButton
+            eventId={id}
+            currentUser={currentUser}
+            redState
+        />
       </div>
       <hr className="border-t-1 border-neutral-700" />
       {category && (
