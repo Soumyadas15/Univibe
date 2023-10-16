@@ -1,17 +1,17 @@
 {
     "colleges": [
       {
-        "name": "MCKV Institute of Engineering",
+        "name": "Dummy college 1",
         "city": "Howrah",
         "state": "West Bengal"
       },
       {
-        "name": "Indian Institute of Technology",
+        "name": "Dummy college 2",
         "city": "Kharagpur",
         "state": "West Bengal"
       },
       {
-        "name": "Indian Institute of Technology",
+        "name": "Dummy college 3",
         "city": "Bombay",
         "state": "Maharashtra"
       }

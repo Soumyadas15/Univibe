@@ -57,7 +57,7 @@ const BottomBarItem: React.FC<BottomBarItem> = ({
                     >
                         <Icon
                             size={24}
-                            className='object-contain'
+                            className='object-contain-1'
                         />
                     </div>
 

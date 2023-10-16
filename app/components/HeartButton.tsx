@@ -37,7 +37,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({
         size={28}
         className={`fill-white absolute -top-[2px] -right-[2px] ${
           hasFavorited && redState
-            ? 'fill-[#ff0000]'
+            ? 'fill-[#ff0001]'
             : hasFavorited
             ? 'fill-[#4ee428]'
             : 'fill-neutral-500/70'
