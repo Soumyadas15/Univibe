@@ -13,10 +13,6 @@ async function generateCode(): Promise<string> {
 
 let userEmail: string;
 
-const code = await (async () => {
-  return await generateCode();
-})();
-
 export async function POST(
   request: Request, 
 ) {
@@ -28,6 +24,7 @@ export async function POST(
     name,
    } = body;
 
+    const code = await generateCode();
     const hashedPassword = await bcrypt.hash(password, 12);
     userEmail = email;
 
