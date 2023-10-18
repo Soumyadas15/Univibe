@@ -1,32 +1,21 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-
+import crypto from "crypto";
 import prisma from "@/app/libs/prismadb";
 import { sendMail } from "@/app/utils/mailSender";
 
-let generatedNumbers = new Set<string>();
 
-function generateCode(): string {
-    let randomNumber: number = Math.floor(Math.random() * 900000) + 100000;
-    let randomString: string = randomNumber.toString();
-
-    while (generatedNumbers.has(randomString)) {
-        randomNumber = Math.floor(Math.random() * 900000) + 100000;
-        randomString = randomNumber.toString();
-    }
-
-    generatedNumbers.add(randomString);
-
-    if (generatedNumbers.size >= 900000) {
-        generatedNumbers.clear();
-    }
-    
-    return randomString;
+async function generateCode(): Promise<string> {
+  const randomBytes = crypto.randomBytes(3);
+  const randomString = randomBytes.toString("hex");
+  return randomString.substring(0, 6).toUpperCase();
 }
 
 let userEmail: string;
 
-const code: string = generateCode();
+const code = await (async () => {
+  return await generateCode();
+})();
 
 export async function POST(
   request: Request, 
