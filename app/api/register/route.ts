@@ -5,7 +5,7 @@ import prisma from "@/app/libs/prismadb";
 import { sendMail } from "@/app/utils/mailSender";
 
 
-async function generateCode(): Promise<string> {
+function generateCode(): string {
   const randomBytes = crypto.randomBytes(3);
   const randomString = randomBytes.toString("hex");
   return randomString.substring(0, 6).toUpperCase();
@@ -16,6 +16,7 @@ let userEmail: string;
 export async function POST(
   request: Request, 
 ) {
+
   const body = await request.json();
   const { 
     email,
@@ -24,7 +25,7 @@ export async function POST(
     name,
    } = body;
 
-    const code = await generateCode();
+    const code = generateCode();
     const hashedPassword = await bcrypt.hash(password, 12);
     userEmail = email;
 
