@@ -4,11 +4,24 @@ import bcrypt from "bcrypt";
 import prisma from "@/app/libs/prismadb";
 import { sendMail } from "@/app/utils/mailSender";
 
+let generatedNumbers = new Set<string>();
+
 function generateCode(): string {
-  const min = 100000;
-  const max = 999999;
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomNumber.toString();
+    let randomNumber: number = Math.floor(Math.random() * 900000) + 100000;
+    let randomString: string = randomNumber.toString();
+
+    while (generatedNumbers.has(randomString)) {
+        randomNumber = Math.floor(Math.random() * 900000) + 100000;
+        randomString = randomNumber.toString();
+    }
+
+    generatedNumbers.add(randomString);
+
+    if (generatedNumbers.size >= 900000) {
+        generatedNumbers.clear();
+    }
+    
+    return randomString;
 }
 
 let userEmail: string;
