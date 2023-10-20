@@ -48,10 +48,10 @@ const RegisterModal= () => {
 
   });
 
-  const handleClick = () => {
-    registerModal.onClose();
-    welcomeModal.onOpen();
-  }
+  const switchForm = useCallback(() => {
+    registerModal.onClose()
+    emailModal.onOpen();
+  }, [registerModal, emailModal])
 
   const toggleForm = () => {
     registerModal.onClose();
@@ -68,8 +68,7 @@ const RegisterModal= () => {
     
     axios.post('/api/register', data)
     .then(() => {
-      registerModal.onClose();
-      emailModal.onOpen();
+      switchForm();
     })
     .catch((error) => {
     

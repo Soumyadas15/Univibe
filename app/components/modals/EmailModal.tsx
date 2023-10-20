@@ -38,7 +38,7 @@ const EmailModal = () => {
 
     const handleClose = useCallback(() => {
         emailModal.onClose();
-    }, [])
+    }, [emailModal])
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         
