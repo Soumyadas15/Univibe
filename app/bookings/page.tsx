@@ -1,6 +1,18 @@
+import getCurrentUser from "../actions/getCurrentUser";
 import EmptyState from "../components/EmptyState";
 
-const BookingsPage = () => {
+const BookingsPage = async () => {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        return (
+            <EmptyState
+                title="Unauthorized access"
+                subtitle="Please sign in"
+            />
+        )
+    }
+
     return ( 
         <div>
             <EmptyState

@@ -2,6 +2,7 @@
 
 import Button from "@/app/components/Button";
 import Container from "@/app/components/Container";
+import Map from "@/app/components/Map";
 import EventDateInfo from "@/app/components/events/EventDateInfo";
 import EventHead from "@/app/components/events/EventHead";
 import EventInfo from "@/app/components/events/EventInfo";
@@ -51,6 +52,7 @@ const EventClient: React.FC<EventClientProps> = ({
     }, [event.category])
 
     let likedBy = [...(event?.likedBy || [])];
+    const coordinates: [number, number] = [40.748817, -73.985428];
 
     return ( 
        <Container>
@@ -95,6 +97,9 @@ const EventClient: React.FC<EventClientProps> = ({
                         '
                     >
                         <div className="flex flex-col gap-6">
+                            <Map
+                                center={coordinates}
+                            />
                             <EventDateInfo
                                 day={trimmedDay}
                                 month={abbreviatedMonth}

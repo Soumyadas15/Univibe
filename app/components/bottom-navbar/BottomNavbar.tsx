@@ -36,14 +36,14 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
     }
     createModal.onOpen();
 
-}, [currentUser, loginModal])
+}, [currentUser, loginModal, createModal])
 
   return (
     <div className="flex justify-center">
         <section className='
                     fixed 
                     bottom-0 
-                    z-10 
+                    z-[2000]
                     
                     w-full
                     rounded-t-3xl

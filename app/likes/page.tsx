@@ -6,6 +6,15 @@ import LikesClient from "./LikesClient";
 const LikePage = async () => {
     const likedEvents = await getLikedEvents();
     const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+        return (
+            <EmptyState
+                title="Unauthorized access"
+                subtitle="Please sign in"
+            />
+        )
+    }
     
     if (likedEvents.length === 0){
         return (

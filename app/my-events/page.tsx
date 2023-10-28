@@ -10,6 +10,15 @@ const MyEventsPage = async () => {
     const myEvents = await getEvents({
         userId: currentUser?.id
     });
+
+    if (!currentUser) {
+        return (
+            <EmptyState
+                title="Unauthorized access"
+                subtitle="Please sign in"
+            />
+        )
+    }
     
     if (myEvents.length === 0){
         return (
