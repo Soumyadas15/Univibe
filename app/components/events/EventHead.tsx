@@ -37,11 +37,13 @@ const EventHead: React.FC<EventHeadProps> = ({
           relative
         "
       >
+        
         <Image
           src={imageSrc}
           fill
           className="object-cover w-full"
           alt="Image"
+         
         />
         <div
           className="
