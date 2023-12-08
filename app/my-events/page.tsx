@@ -8,7 +8,7 @@ const MyEventsPage = async () => {
     const currentUser = await getCurrentUser();
 
     const myEvents = await getEvents({
-        userId: currentUser?.id
+        userId: (currentUser?.id)
     });
 
     if (!currentUser) {

@@ -1,35 +1,32 @@
-import prisma from '@/app/libs/prismadb'
+import prisma from '@/app/libs/prismadb';
 
 export interface IEventParams {
-    userId?: string;
+    userId?: number;
 }
-export default async function getEvents(
-    params: IEventParams
-) {
+
+export default async function getEvents(params: IEventParams) {
     try {
         const { userId } = params;
 
         let query: any = {};
 
-        if (userId) {
+        if (userId !== undefined) {
             query.userId = userId;
-          }
+        }
         const events = await prisma.event.findMany({
             where: query,
             orderBy: {
-              createdAt: 'desc'
+                createdAt: 'desc'
             }
         });
 
         const safeEvents = events.map((event) => ({
             ...event,
             createdAt: event.createdAt.toISOString(),
- 
         }));
 
         return safeEvents;
-    }
-    catch (error: any){
+    } catch (error: any) {
         throw new Error(error);
     }
 }
