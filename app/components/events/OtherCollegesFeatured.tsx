@@ -39,13 +39,13 @@ const OtherCollegesFeatured = async (
                 title={event1.title}
                 college={event1?.college}
                 image={event1?.imageSrc}
-                link={event1?.id}
+                link={event1?.id.toString()}
             />
             <FeaturedEvents1
                 title={event2.title}
                 college={event2?.college}
                 image={event2?.imageSrc}
-                link={event2?.id}
+                link={event2?.id.toString()}
             />
             
         </div>
