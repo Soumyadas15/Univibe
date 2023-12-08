@@ -24,7 +24,7 @@ interface EventInfoProps {
   team?: boolean,
   members?: number,
   likedBy: String[],
-  id: string;
+  id: number;
   currentUser?: SafeUser | null;
 }
 
@@ -78,7 +78,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
           </div>
         </div>
         <HeartButton
-            eventId={parseInt(id)}
+            eventId={id}
             currentUser={currentUser}
             redState
         />

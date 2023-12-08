@@ -8,7 +8,7 @@ export default async function Liked(
     { event }: { event: SafeEvent }
 ){
     const likesModal = useLikesModal();
-    let likedBy = [...(event?.likedBy || [])];
+    // let likedBy = [...(event?.likedBy || [])];
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -19,11 +19,11 @@ export default async function Liked(
             <div>
             <h3>Liked By:</h3>
             <ul>
-            {likedBy.map((user, index) => (
+            {/* {likedBy.map((user, index) => (
                         <li key={index}>
                             {user}
                         </li>
-                    ))}
+                    ))} */}
             </ul>
         </div>
         </div>

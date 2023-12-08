@@ -12,7 +12,7 @@ import Heading2 from "../Heading2";
 interface EventHeadProps {
   title: string;
   imageSrc: string;
-  id: string;
+  id: number;
   currentUser?: SafeUser | null
 }
 

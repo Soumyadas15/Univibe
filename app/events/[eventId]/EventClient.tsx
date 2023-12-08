@@ -51,7 +51,7 @@ const EventClient: React.FC<EventClientProps> = ({
         item.label === event.category);
     }, [event.category])
 
-    let likedBy = [...(event?.likedBy || [])];
+    // let likedBy = [...(event?.likedBy || [])];
     const coordinates: [number, number] = [40.748817, -73.985428];
 
     return ( 
@@ -78,7 +78,7 @@ const EventClient: React.FC<EventClientProps> = ({
                         category={category}
                         // @ts-ignore
                         description={event.description}
-                        likedBy={likedBy}
+                        // likedBy={likedBy}
                         //@ts-ignore
                         team={event?.team}
                         id={event.id}
