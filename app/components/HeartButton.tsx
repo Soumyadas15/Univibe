@@ -7,7 +7,7 @@ import { SafeUser } from "@/app/types";
 
 
 interface HeartButtonProps {
-  eventId: string
+  eventId: number
   currentUser?: SafeUser | null
   redState?: boolean
 }

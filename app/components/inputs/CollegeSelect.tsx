@@ -60,6 +60,8 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                     label: college.name,
                     value: college.name,
                     region: college.city,
+                    latitude: college.latitude,
+                    longitude: college.longitude,
                 }))}
                 
                 value={value}

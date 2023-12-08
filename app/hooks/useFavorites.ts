@@ -8,7 +8,7 @@ import { SafeUser } from "@/app/types";
 import useLoginModal from "./useLoginModal";
 
 interface IUseFavorite {
-  eventId: string;
+  eventId: number;
   currentUser?: SafeUser | null
 }
 
@@ -18,10 +18,10 @@ const useFavorite = ({ eventId, currentUser }: IUseFavorite) => {
   const loginModal = useLoginModal();
 
   const hasFavorited = useMemo(() => {
-    const list = currentUser?.favoriteIds || [];
-
-    return list.includes(eventId);
-  }, [currentUser, eventId]);
+    const isFavorited = currentUser?.favoriteEvents?.some(favoriteEvent => favoriteEvent.eventId === eventId) ?? false;
+    console.log(`hasFavorited for event ${eventId}:`, isFavorited);
+    return isFavorited;
+}, [currentUser, eventId]);
 
   const toggleFavorite = useCallback(async (
     e: React.MouseEvent<HTMLDivElement>
@@ -44,7 +44,7 @@ const useFavorite = ({ eventId, currentUser }: IUseFavorite) => {
 
       await request();
       router.refresh();
-      toast.success('Added to favorites :)');
+      toast.success('success :)');
     } catch (error) {
       toast.error('Something went wrong :(');
       console.log(error);

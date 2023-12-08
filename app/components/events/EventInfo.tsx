@@ -78,7 +78,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
           </div>
         </div>
         <HeartButton
-            eventId={id}
+            eventId={parseInt(id)}
             currentUser={currentUser}
             redState
         />

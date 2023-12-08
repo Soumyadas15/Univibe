@@ -119,6 +119,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
             return onNext();
         }
         setIsLoading(true);
+        console.log(data);
         
         axios.post('/api/events', data)
         .then(() => {

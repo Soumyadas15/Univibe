@@ -3,17 +3,23 @@
       {
         "name": "Dummy college 1",
         "city": "Howrah",
-        "state": "West Bengal"
+        "state": "West Bengal",
+        "latitude": 40.748817, 
+        "longitude": -73.985428
       },
       {
         "name": "Dummy college 2",
         "city": "Kharagpur",
-        "state": "West Bengal"
+        "state": "West Bengal",
+        "latitude": 40.748817, 
+        "longitude": -73.985428
       },
       {
         "name": "Dummy college 3",
         "city": "Bombay",
-        "state": "Maharashtra"
+        "state": "Maharashtra",
+        "latitude": 40.748817, 
+        "longitude": -73.985428
       }
     ]
   }

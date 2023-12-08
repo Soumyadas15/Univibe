@@ -28,32 +28,32 @@ const EventHead: React.FC<EventHeadProps> = ({
     <Heading2
         title={title}
       />
-      <div className="
-          w-full
-          h-[40vh]
-          md:h-[60vh]
-          overflow-hidden 
-          rounded-xl
-          relative
-        "
-      >
-        
-        <Image
-          src={imageSrc}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-         
-        />
-        <div
-          className="
-            absolute
-            top-5
-            right-5
+        <div className="
+            w-full
+            h-[40vh]
+            md:h-[60vh]
+            overflow-hidden 
+            rounded-xl
+            relative
+            bg-red-400
           "
         >
+          
+          <Image
+            src={imageSrc}
+            fill
+            className="object-cover w-full"
+            alt="Image"
+          />
+          <div
+            className="
+              absolute
+              top-5
+              right-5
+            "
+          >
+          </div>
         </div>
-      </div>
     </>
    );
 }
