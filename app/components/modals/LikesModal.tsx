@@ -12,7 +12,6 @@ import React, { useEffect, useState } from "react";
 import Likes from "../Likes";
 import { SafeEvent, SafeUser } from "@/app/types";
 import getUserById from "@/app/actions/getUserById";
-import LogName from "../LogName";
 import Image from "next/image";
 import Avatar from "../navbar/Avatar";
 import { categories } from "@/app/utils/categories";
