@@ -2,17 +2,21 @@ import prisma from '@/app/libs/prismadb';
 import { Event, User } from '@prisma/client'; // Assuming this import path is correct
 
 interface IParams {
-    eventId: string; // Assuming eventId is always required and is a string
+    eventId?: string;
 }
 
 export default async function getEventById(params: IParams) {
     try {
         const { eventId } = params;
+        
+        if (!eventId) {
+            return null;
+        }
         const eventIdInt = parseInt(eventId, 10); // Convert eventId to an integer
 
         const event = await prisma.event.findUnique({
             where: {
-                id: eventIdInt // Use the integer value
+                id: eventIdInt
             },
             include: {
                 user: true

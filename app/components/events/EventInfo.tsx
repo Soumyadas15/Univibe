@@ -23,7 +23,7 @@ interface EventInfoProps {
   } | undefined,
   team?: boolean,
   members?: number,
-  likedBy: String[],
+  likedBy?: String[],
   id: number;
   currentUser?: SafeUser | null;
 }
@@ -42,7 +42,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
     const likes = useLikes();
     const likesModal = useLikesModal();
 
-    let len = likedBy.length;
+    // let len = likedBy.length;
   return ( 
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex items-center justify-between">
@@ -64,7 +64,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
               src={user?.image} 
             />
           </div>
-          <div
+          {/* <div
               className="flex gap-2 cursor-default"
           >
               <span className="font-bold">{len}</span> 
@@ -75,7 +75,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
               >
                 view
               </div>
-          </div>
+          </div> */}
         </div>
         <HeartButton
             eventId={id}
