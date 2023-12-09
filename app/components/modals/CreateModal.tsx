@@ -373,6 +373,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
             isOpen={createModal.isOpen}
             onClose={createModal.onClose}
             actionLabel={actionLabel}
+            disabled={isLoading}
             secondaryActionLabel={secondaryActionLabel}
             secondaryAction={step == STEPS.DESCRIPTION ? undefined : onBack}
             title="Create your event"

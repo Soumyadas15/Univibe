@@ -42,7 +42,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const confettiStore = useConfettiStore();
     const [setDate, useSetDate] = useState(null);
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
     const eventRegistrationModal = useEventRegistrationModal();
     const registerSuccess = useRegisterSuccess();
     
@@ -126,7 +126,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
 
     const actionLabel = useMemo(() => {
         if(step === STEPS.SEMESTER){
-            return 'Create'
+            return 'Register'
         }
 
         return 'Next'
@@ -244,6 +244,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             isOpen={eventRegistrationModal.isOpen}
             onClose={eventRegistrationModal.onClose}
             actionLabel={actionLabel}
+            disabled={isLoading}
             secondaryActionLabel={secondaryActionLabel}
             secondaryAction={step == STEPS.DESCRIPTION ? undefined : onBack}
             title={`Register for ${eventName}`}
