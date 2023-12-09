@@ -21,12 +21,15 @@ interface EventClientProps {
         user: SafeUser
     };
     currentUser?: SafeUser | null;
+    isRegistered?: boolean;
 }
 
 
 const EventClient: React.FC<EventClientProps> = ({
     event,
-    currentUser
+    currentUser,
+    isRegistered
+
 }) => {
 
     const { date } =  event;
@@ -110,10 +113,21 @@ const EventClient: React.FC<EventClientProps> = ({
                                 department={event.department}
                             />
                             <div className="mb-7">
-                            <Button
-                                label='Register'
-                                onClick={incompleteModal.onOpen}
-                            />
+                            
+                            
+                            {isRegistered ? (
+                                <Button
+                                    disabled={true}
+                                    label='Already Registered'
+                                    onClick={() => {}}
+                                />
+                                ) : (
+                                <Button
+                                    disabled={false}
+                                    label='Register'
+                                    onClick={eventRegistrationModal.onOpen}
+                                />
+                                )}
                             </div>
                         </div>
                     </div>

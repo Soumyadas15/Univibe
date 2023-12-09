@@ -15,7 +15,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
     currentUser,
 }) => {
-    console.log(currentUser);
+    
     return ( 
         <div className="
                 fixed

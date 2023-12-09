@@ -19,7 +19,7 @@ const useFavorite = ({ eventId, currentUser }: IUseFavorite) => {
 
   const hasFavorited = useMemo(() => {
     const isFavorited = currentUser?.favoriteEvents?.some(favoriteEvent => favoriteEvent.eventId === eventId) ?? false;
-    console.log(`hasFavorited for event ${eventId}:`, isFavorited);
+    
     return isFavorited;
 }, [currentUser, eventId]);
 

@@ -6,6 +6,7 @@ import Liked from "@/app/components/modals/Liked";
 import LocoScroll from "@/app/components/LocoScroll";
 import Incomplete from "@/app/components/modals/Incomplete";
 import { SafeUser } from "@/app/types";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 interface IParams {
     eventId?: string;
@@ -20,6 +21,7 @@ const MainLayout = async ({
 }) => {
     const event = await getEventById(params);
     let users: SafeUser[] = [];
+    const currentUser = await getCurrentUser();
     
     
     // if (likedBy && likedBy.length > 0) {
@@ -41,7 +43,7 @@ const MainLayout = async ({
     return ( 
         
             <main className="md:pl-[72px] h-full">
-                <EventRegiatrationModal currEvent={event}/>
+                <EventRegiatrationModal currEvent={event} currentUser={currentUser}/>
                 {/* <LikesModal 
                     likedBy={users}
                 /> */}

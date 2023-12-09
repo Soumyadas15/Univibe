@@ -7,7 +7,8 @@ import LoginModal from "../components/modals/LoginModal";
 import RegisterModal from "../components/modals/RegisterModal";
 import SuccessModal from "../components/modals/SuccessModal";
 import WelcomeModal from "../components/modals/WelcomeModal";
-import EventRegistrationModal from "../components/modals/event registration/EventRegistrationForm";
+import RegistrationSuccessModal from "../events/[eventId]/RegistrationSuccessModal";
+// import EventRegistrationModal from "../components/modals/event registration/EventRegistrationForm";
 import { SafeUser } from "../types";
 
 const ModalProvider = async () => {
@@ -21,6 +22,7 @@ const ModalProvider = async () => {
             <SuccessModal/>
             <LoginModal/>
             <RegisterModal/>
+            <RegistrationSuccessModal/>
         </div>
      );
 }

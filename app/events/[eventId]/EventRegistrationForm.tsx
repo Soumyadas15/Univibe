@@ -2,14 +2,14 @@
 
 import useCreateModal from "@/app/hooks/useCreateModal";
 import useSuccessModal from "@/app/hooks/useSuccessModal";
-import { useCallback, useMemo, useState } from "react";
+import { use, useCallback, useMemo, useState } from "react";
 import { useConfettiStore } from "@/app/hooks/useConfettiStore";
 import { categories } from "@/app/utils/categories";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import dayjs from "dayjs";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { SafeEvent, SafeUser } from "@/app/types";
 
 import useEventRegistrationModal from "@/app/hooks/useEventRegistrationModal";
@@ -20,13 +20,12 @@ import ImageUpload from "@/app/components/inputs/ImageUpload";
 import DatePicker from "@/app/components/inputs/DatePicker";
 import Modal from "@/app/components/modals/Modal";
 import NumberInput from "@/app/components/inputs/NumberInput";
+import useRegisterSuccess from "@/app/hooks/useRegisterSuccess";
 
 enum STEPS {
     DESCRIPTION = 0,
-    CATEGORY = 1,
-    IMAGES = 2,
-    INFO = 3,
-    DATE = 4,
+    TEAM = 1,
+    SEMESTER = 2,
 }
 
 interface CreateModalProps {
@@ -45,11 +44,14 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const eventRegistrationModal = useEventRegistrationModal();
+    const registerSuccess = useRegisterSuccess();
     
     const eventName = currEvent ? currEvent.title : 'Event not found';
     const userCollege = currentUser?.institute;
 
     const [step, setStep] = useState(STEPS.DESCRIPTION);
+
+    const slug = useParams();
 
     const {
         register,
@@ -62,13 +64,14 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         reset
     } = useForm<FieldValues>({
         defaultValues: {
-            category: '',
-            department: '',
-            venue: '',
-            imageSrc: '',
-            title: '',
-            description: '',
-            date: '',
+            semester: '',
+            member1: '',
+            member2: '',
+            member3: '',
+            phone: '',
+            name: '',
+            //@ts-ignore
+            eventId: slug.eventId,
         }
     })
 
@@ -77,7 +80,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         setCustomValue('date', formattedDate);
     };
 
-    const category = watch('category');
+    // const category = watch('category');
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -93,23 +96,27 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const onNext = () => {
         setStep((value) => value + 1);
     }
+
     const handleSuccess = () => {
-        createModal.onClose();
-        confettiStore.onOpen();
-        successModal.onOpen();
+        eventRegistrationModal.onClose();
+        toast.success('Success');
+        registerSuccess.onOpen();
+        router.refresh();
     }
 
 
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (step !== STEPS.DATE){
+        if (step !== STEPS.SEMESTER){
             return onNext();
         }
         setIsLoading(true)
+        console.log(data)
+        //@ts-ignore
         
-        axios.post('/api/events', data)
+        axios.post('/api/registrations', data)
         .then(() => {
             handleSuccess();
-            router.refresh();
         }) .catch(() => {
             toast.error('Somethign went wrong');
         }) .finally(() => {
@@ -118,7 +125,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     }
 
     const actionLabel = useMemo(() => {
-        if(step === STEPS.DATE){
+        if(step === STEPS.SEMESTER){
             return 'Create'
         }
 
@@ -138,7 +145,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         confettiStore.onOpen();
     }, [createModal, successModal]);
 
-    const imageSrc = watch('imageSrc');
+    // const imageSrc = watch('imageSrc');
 
     let bodyContent = (
         <div className="flex flex-col gap-8">
@@ -167,54 +174,44 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             </div>
     )
 
-    if (step === STEPS.CATEGORY){
-        bodyContent = (
-            <div className="flex flex-col gap-8">
-            <Heading
-                title='Which of these best describes the event?'
-                subtitle="Pick a category"
-                center
-            />
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    md:grid-cols-2
-                    gap-3
-                    max-h-[50vh]
-                    overflow-y-auto
-                "
-            >
-                {categories.map((item) => (
-                    <div key={item.label} className="col-span-1">
-                        <CategoryInput
-                            onClick={(category) => {setCustomValue('category', category)}}
-                            selected={category === item.label}
-                            label={item.label}
-                            icon={item.icon}
-                        />
-                    </div>
-                ))}
-            </div>
-        </div>
-        )
-    }
-    if (step === STEPS.IMAGES){
+    if (step === STEPS.TEAM){
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
-                    title='Add image'
-                    subtitle="Pick a category"
+                    title='Team details'
+                    subtitle='These will be sent to organizers'
                     center
                 />
-                <ImageUpload
-                    value={imageSrc}
-                    onChange={(value) => setCustomValue('imageSrc', value)}
+                <Input
+                    id='member1'
+                    label='Member 1'
+                    disabled={false}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                
+                <Input
+                    id='member2'
+                    label='Member 2'
+                    disabled={false}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input
+                    id='member3'
+                    label='Member 3'
+                    disabled={false}
+                    register={register}
+                    errors={errors}
+                    required
                 />
             </div>
         )
     }
-    if (step === STEPS.INFO){
+    
+    if (step === STEPS.SEMESTER){
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
@@ -231,31 +228,13 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
                     required
                 />
                 <Input
-                    id='venue'
+                    id='semester'
                     label='Venue'
                     disabled={false}
                     register={register}
                     errors={errors}
                     required
                 />
-            </div>
-        )
-    }
-    if (step === STEPS.DATE){
-        bodyContent = (
-            <div className="flex flex-col gap-8">
-                <Heading
-                    title='Date'
-                    subtitle="Pick a category"
-                    center
-                />
-                <div className="flex items-center justify-center">
-                    <DatePicker
-                        onClick={() => {}}
-                        onSelectDate={handleDateSelect}
-                    />
-                </div>
-                
             </div>
         )
     }

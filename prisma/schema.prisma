@@ -83,7 +83,7 @@ model Registration {
   id              Int      @id @default(autoincrement())
   userId          Int
   eventId         Int  
-  phone           BigInt
+  phone           String
   semester        String
   member1         String?
   member2         String?
