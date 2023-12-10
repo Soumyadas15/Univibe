@@ -83,14 +83,14 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                     currentUser={currentUser}
                 />
 
-                <div onClick={onCreate}>
+                {currentUser?.isAdmin &&   (<div onClick={onCreate}>
                     <BottomBarItem
                         icon={AiOutlinePlus}
                         label="Add event"
                         circle
                         currentUser={currentUser}
                     />
-                </div>
+                </div>)}
 
                 <BottomBarItem
                     icon={FaTicketAlt}

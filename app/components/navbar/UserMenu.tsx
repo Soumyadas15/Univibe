@@ -88,7 +88,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 items-center
                 gap-3
             ">
-                <div 
+                
+                {currentUser?.isAdmin  &&   (<div 
                     onClick={onCreate}
                     className="
                         hidden
@@ -110,7 +111,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         cursor-pointer
                 ">
                     Create an event
-                </div>
+                </div>)}
                 <div
                     onClick={toggleOpen}
                     className="
