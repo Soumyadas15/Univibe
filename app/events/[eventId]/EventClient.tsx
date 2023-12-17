@@ -13,7 +13,9 @@ import { SafeEvent, SafeUser } from "@/app/types";
 import { categories } from "@/app/utils/categories";
 import { Registration } from "@prisma/client"
 import moment from "moment";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { loadStripe } from '@stripe/stripe-js';
+import { checkoutOrder } from "@/app/actions/order.actions";
 
 interface EventClientProps {
     registrations?: Registration[];
@@ -24,6 +26,8 @@ interface EventClientProps {
     isRegistered?: boolean;
 }
 
+
+loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const EventClient: React.FC<EventClientProps> = ({
     event,
@@ -48,6 +52,32 @@ const EventClient: React.FC<EventClientProps> = ({
         console.log('clicked');
         incompleteModal.onOpen();
     }
+
+    const onCheckout = async () => {
+        // console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+        const order = {
+            eventTitle: event.title,
+            eventId: event.id,
+            price: event.price,
+            paidEvent: event.paidEvent,
+            buyerId: currentUser?.id,
+        }
+        //@ts-ignore
+        console.log(order.price);
+        await checkoutOrder(order);
+    }
+
+    useEffect(() => {
+        // Check to see if this is a redirect back from Checkout
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('success')) {
+          console.log('Order placed! You will receive an email confirmation.');
+        }
+    
+        if (query.get('canceled')) {
+          console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+        }
+      }, []);
 
     const category = useMemo(() => {
         return categories.find((item) => 
@@ -122,11 +152,24 @@ const EventClient: React.FC<EventClientProps> = ({
                                         label='Registered'
                                         onClick={() => {}}
                                     />
-                                    <Button
-                                        label='Generate Ticket'
-                                        onClick={() => {}}
-                                        outline
-                                    />
+                                    {(event.paidEvent == true) ? (
+                                        <form action={onCheckout} method="post">
+                                            <Button
+                                                label='Pay'
+                                                onClick={() => {}}
+                                                outline
+                                            />
+                                        </form>
+                                        
+                                    ) : (
+                                        <Button
+                                            label='Generate Ticket'
+                                            onClick={() => {}}
+                                            outline
+                                        />
+                                    )
+                                    
+                                    }
 
                                 </div>
                                 

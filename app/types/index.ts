@@ -17,3 +17,11 @@ export type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified' | 
   emailVerified: string | null;
   favoriteEvents?: FavoriteEvent[];
 };
+
+export type CheckoutOrderParams = {
+  eventTitle: string;
+  eventId: number;
+  price: number;
+  paidEvent: boolean;
+  buyerId: number;
+}

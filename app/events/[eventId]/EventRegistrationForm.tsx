@@ -26,6 +26,7 @@ enum STEPS {
     DESCRIPTION = 0,
     TEAM = 1,
     SEMESTER = 2,
+    PRICE = 3,
 }
 
 interface CreateModalProps {
@@ -45,8 +46,10 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const [isLoading, setIsLoading] = useState(false);
     const eventRegistrationModal = useEventRegistrationModal();
     const registerSuccess = useRegisterSuccess();
+
     
     const eventName = currEvent ? currEvent.title : 'Event not found';
+    const isPaidEvent = currEvent?.paidEvent || false;
     const userCollege = currentUser?.institute;
 
     const [step, setStep] = useState(STEPS.DESCRIPTION);

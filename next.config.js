@@ -5,7 +5,10 @@ const nextConfig = {
             "res.cloudinary.com",
             "i.ibb.co"
         ]
-    }
+    },
+    experimental: {
+        serverActions: true,
+    },
 }
 
 module.exports = nextConfig

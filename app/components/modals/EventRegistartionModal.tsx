@@ -17,7 +17,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { SafeUser } from "@/app/types";
+import { SafeEvent, SafeUser } from "@/app/types";
 import { useUserStore } from "@/app/hooks/useCurrentUser";
 import Counter from "../inputs/Counter";
 import Checkbox from "../inputs/Checkbox";
@@ -27,10 +27,12 @@ enum STEPS {
     DETAILS = 0,
     TEAM = 1,
     SEMESTER = 2,
+    PAYMENT = 3,
 }
 
 interface EventRegistrationModalProps {
     currentUser?: SafeUser | null;
+    event?: SafeEvent | null;
 }
 
 const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
