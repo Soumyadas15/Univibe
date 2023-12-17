@@ -63,7 +63,6 @@ const EventClient: React.FC<EventClientProps> = ({
             buyerId: currentUser?.id,
         }
         //@ts-ignore
-        console.log(order.price);
         await checkoutOrder(order);
     }
 
