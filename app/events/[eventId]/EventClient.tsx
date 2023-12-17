@@ -116,11 +116,20 @@ const EventClient: React.FC<EventClientProps> = ({
                             
                             
                             {isRegistered ? (
-                                <Button
-                                    disabled={true}
-                                    label='Already Registered'
-                                    onClick={() => {}}
-                                />
+                                <div className="flex flex-col sm:flex-col md:flex-row gap-3">
+                                    <Button
+                                        disabled={true}
+                                        label='Registered'
+                                        onClick={() => {}}
+                                    />
+                                    <Button
+                                        label='Generate Ticket'
+                                        onClick={() => {}}
+                                        outline
+                                    />
+
+                                </div>
+                                
                                 ) : (
                                 <Button
                                     disabled={false}

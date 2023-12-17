@@ -25,7 +25,7 @@ model User {
   events          Event[]
   registrations   Registration[]
   tokens          Token[]
-  favoriteEvents  FavoriteEvent[] // Relation to FavoriteEvent
+  favoriteEvents  FavoriteEvent[]
 }
 
 model Event {
@@ -43,11 +43,13 @@ model Event {
   lat             Float?
   long            Float?
   memberCount     Int?
+  paidEvent       Boolean?  @default(false)
+  price           Int?
 
   userId          Int
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   registrations   Registration[]
-  likedByUsers    FavoriteEvent[] // Relation to FavoriteEvent
+  likedByUsers    FavoriteEvent[]
 }
 
 model Token {

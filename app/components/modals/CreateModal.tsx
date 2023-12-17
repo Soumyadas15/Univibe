@@ -30,6 +30,7 @@ enum STEPS {
     INFO = 3,
     MEMBERS = 4,
     DATE = 5,
+    PRICE = 6,
 }
 
 interface CreateModalProps {
@@ -45,6 +46,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
     const [setDate, useSetDate] = useState(null);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [feeRequired, setFeeRequired] = useState(false);
     
     const userName = currentUser ? currentUser.institute : 'College not found';
     const userCollege = currentUser?.institute;
@@ -71,6 +73,8 @@ const CreateModal: React.FC<CreateModalProps> = ({
             title: '',
             description: '',
             date: '',
+            paidEvent: false,
+            price: 0,
         }
     })
 
@@ -82,6 +86,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
     const category = watch('category');
     const memberCount = watch('memberCount');
     const team = watch('team');
+    const price = watch('price');
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -100,6 +105,17 @@ const CreateModal: React.FC<CreateModalProps> = ({
             setCustomValue('memberCount', 1); 
         }
     };
+
+    const handlePriceCheckboxChange = (value: boolean) => {
+        setCustomValue('paidEvent', value);
+        setFeeRequired(value);
+        if (value) {
+            setCustomValue('price', 1); 
+        }
+        if (!value) {
+            setCustomValue('price', 0); 
+        } 
+    };
     
     const onBack = () => {
         setStep((value) => value - 1);
@@ -115,9 +131,10 @@ const CreateModal: React.FC<CreateModalProps> = ({
 
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (step !== STEPS.DATE){
+        if (step !== STEPS.PRICE){
             return onNext();
         }
+        data.price = parseInt(data.price, 10);
         setIsLoading(true);
         console.log(data);
         
@@ -134,7 +151,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
     }
 
     const actionLabel = useMemo(() => {
-        if(step === STEPS.DATE){
+        if(step === STEPS.PRICE){
             return 'Create'
         }
 
@@ -364,6 +381,45 @@ const CreateModal: React.FC<CreateModalProps> = ({
                     </div>
                 </motion.div>
                 
+            </div>
+        )
+    }
+
+    if (step === STEPS.PRICE){
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title='Pricing info'
+                    // subtitle="Is this a paid event?"
+                    center
+                />
+                <div className="flex flex-col gap-8">
+                <motion.div
+                    key="members"
+                    initial={{ opacity: 0, x: "-50%" }}
+                    animate={{ opacity: 1, x: "0%" }}
+                    exit={{ opacity: 0, x: "100%" }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                    <div className="flex flex-col gap-8">
+                        <Checkbox
+                            title="This is a paid event"
+                            value = {price}
+                            onChange={handlePriceCheckboxChange}
+                        />
+                        <hr className="border-t-1 border-neutral-500 dark:border-neutral-800" />
+                        <Input
+                            id='price'
+                            label='Registration Fee'
+                            formatPrice={true}
+                            type = 'number'
+                            disabled={!feeRequired || isLoading}
+                            register={register}
+                            errors={errors}
+                        />
+                    </div>
+                </motion.div>
+                </div>
             </div>
         )
     }

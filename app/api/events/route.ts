@@ -11,7 +11,7 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        const { category, department, venue, college, imageSrc, team, memberCount, title, description, date } = body;
+        const { category, department, venue, college, imageSrc, team, memberCount, title, description, date, paidEvent, price } = body;
 
         // Validate required fields
         if (!title || !description || !date || !category || !department || !venue || !imageSrc) {
@@ -27,11 +27,13 @@ export async function POST(request: Request) {
                 category,
                 department,
                 venue,
-                college: college || currentUser.institute, // Use provided college or fallback to user's institute
+                college: college || currentUser.institute,
                 imageSrc,
-                team: team || false, // Default to false if not provided
+                team: team || false,
                 memberCount,
                 userId: currentUser.id,
+                paidEvent,
+                price,
             }
         });
 
