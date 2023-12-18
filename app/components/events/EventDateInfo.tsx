@@ -6,6 +6,7 @@ interface EventDateInfoProps {
     year: string;
     venue: string;
     department: string,
+    direction: string,
 }
 
 const EventDateInfo: React.FC<EventDateInfoProps> = ({
@@ -13,7 +14,8 @@ const EventDateInfo: React.FC<EventDateInfoProps> = ({
     month,
     year,
     venue,
-    department
+    department,
+    direction
 }) => {
     return ( 
         <div className="
@@ -28,7 +30,7 @@ const EventDateInfo: React.FC<EventDateInfoProps> = ({
             rounded-lg
             p-5
         ">
-            <div className="flex flex-col items-baseline gap-8">
+            <div className={`flex ${direction} items-baseline gap-8`}>
                 <div className="flex items-center justify-center gap-3">
                     <div className="text-white bg-[#ff297f] rounded-full p-4">
                         <CalendarDays size={30}/>

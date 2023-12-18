@@ -4,6 +4,7 @@ import EventClient from "./EventClient";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getUserById from "@/app/actions/getUserById";
 import getRegistrationData from "@/app/actions/getRegistrationDetails";
+import EventClient2 from "./EventClient2";
 
 
 interface IParams {
@@ -26,14 +27,24 @@ const EventPage = async (
         )
     }
     return ( 
-        <div>
-           <EventClient
-                //@ts-ignore
-                isRegistered={registered}
-               event={event}
-               currentUser={currentUser}
-           />
-        </div>
+        <>
+            <div className="block md:hidden">
+                <EventClient
+                        //@ts-ignore
+                        isRegistered={registered}
+                    event={event}
+                    currentUser={currentUser}
+                />
+            </div>
+            <div className="hidden md:block">
+                <EventClient2
+                    //@ts-ignore
+                    isRegistered={registered}
+                    event={event}
+                    currentUser={currentUser}
+                />
+            </div>
+     </>
      );
 }
  

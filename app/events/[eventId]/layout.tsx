@@ -42,7 +42,7 @@ const MainLayout = async ({
 
     return ( 
         
-            <main className="md:pl-[72px] h-full">
+            <main className="h-full">
                 <EventRegiatrationModal currEvent={event} currentUser={currentUser}/>
                 {/* <LikesModal 
                     likedBy={users}
