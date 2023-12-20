@@ -113,13 +113,25 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         if (step !== STEPS.SEMESTER){
             return onNext();
         }
+
+        const ticketData = {
+            eventId: currEvent?.id,
+            phone: data.phone,
+            semester: data.semester,
+            name: currentUser?.name,
+            member1: data.member1,
+            member2: data.member2,
+            member3: data.member3,
+        }
         setIsLoading(true)
-        console.log(data)
+        console.log(ticketData)
         //@ts-ignore
         
         axios.post('/api/registrations', data)
         .then(() => {
             handleSuccess();
+            axios.post('/api/tickets', ticketData)
+            
         }) .catch(() => {
             toast.error('Somethign went wrong');
         }) .finally(() => {

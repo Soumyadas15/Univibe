@@ -136,20 +136,31 @@ const EventClient2: React.FC<EventClient2Props> = ({
     const handleCancelRegistration = async () => {
         setIsLoading(true);
     
-        try {
-            // Replace with your actual API endpoint and data
-            await axios.delete('/api/registrations', {
-                data: { 
-                    eventId: event.id, 
-                    userId: currentUser?.id 
-                }
+        axios
+            .delete('/api/registrations', {
+                data: {
+                    eventId: event.id,
+                    userId: currentUser?.id,
+                },
+            })
+            .then(() => {
+                toast.success('Registration cancelled successfully');
+                eventRegistrationModal.onClose();
+                router.refresh();
+                axios.delete('/api/tickets', {
+                    data: {
+                        eventId: event.id,
+                        userId: currentUser?.id,
+                    }
+                })
+            })
+            .catch((error) => {
+                // Handle errors here if needed
+                console.error('Error cancelling registration:', error);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
-            toast.success('Registration cancelled successfully');
-            eventRegistrationModal.onClose();
-            router.refresh(); 
-        } finally {
-            setIsLoading(false);
-        }
     };
 
 

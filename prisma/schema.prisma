@@ -114,7 +114,7 @@ model Ticket {
   id             Int      @id @default(autoincrement())
   userId         Int
   eventId        Int
-  ticketNumber   String   @unique
+  ticketNumber   String?
   issuedAt       DateTime @default(now())
   validTill      DateTime?
   isUsed         Boolean?  @default(false)
