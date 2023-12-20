@@ -7,6 +7,9 @@ import LocoScroll from "@/app/components/LocoScroll";
 import Incomplete from "@/app/components/modals/Incomplete";
 import { SafeUser } from "@/app/types";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import TicketModal from "@/app/events/[eventId]/TicketModal";
+import { getTicketDetails } from "@/app/actions/getTicketDetails";
+import generateQRCode from "@/app/utils/generateQRCode";
 
 interface IParams {
     eventId?: string;
@@ -22,6 +25,9 @@ const MainLayout = async ({
     const event = await getEventById(params);
     let users: SafeUser[] = [];
     const currentUser = await getCurrentUser();
+    //@ts-ignore
+    const ticket = await getTicketDetails(currentUser?.id, event?.id);
+    const qrUrl = await generateQRCode(ticket);
     
     
     // if (likedBy && likedBy.length > 0) {
@@ -47,6 +53,7 @@ const MainLayout = async ({
                 {/* <LikesModal 
                     likedBy={users}
                 /> */}
+                <TicketModal currEvent={event} currentUser={currentUser} qrUrl={qrUrl}/>
                 <Incomplete/>
                 <LocoScroll>
                 {children}

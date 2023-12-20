@@ -22,6 +22,7 @@ import ColorThief from 'colorthief';
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useTicketModal from "@/app/hooks/useTicketModal";
 
 interface EventClient2Props {
     registrations?: Registration[];
@@ -30,6 +31,7 @@ interface EventClient2Props {
     };
     currentUser?: SafeUser | null;
     isRegistered?: boolean;
+    ticketData: any;
 }
 
 
@@ -38,7 +40,8 @@ loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 const EventClient2: React.FC<EventClient2Props> = ({
     event,
     currentUser,
-    isRegistered
+    isRegistered,
+    ticketData
 
 }) => {
 
@@ -59,7 +62,7 @@ const EventClient2: React.FC<EventClient2Props> = ({
     const imageRef = useRef<HTMLImageElement>(null);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-
+    const ticketModal = useTicketModal();
 
     
 
@@ -171,6 +174,10 @@ const EventClient2: React.FC<EventClient2Props> = ({
 
 
 
+    const viewTicket = (() => {
+        console.log(ticketData);
+        ticketModal.onOpen();
+    })
 
 
 
@@ -249,8 +256,8 @@ const EventClient2: React.FC<EventClient2Props> = ({
                             {isRegistered ? (
                                 <Button
                                     disabled={false}
-                                    label='Generate ticket'
-                                    onClick={() => {}}
+                                    label='View ticket'
+                                    onClick={viewTicket}
                                     outline
                                 />
                             ) : (

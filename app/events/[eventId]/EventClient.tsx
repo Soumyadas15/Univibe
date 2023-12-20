@@ -19,6 +19,7 @@ import { checkoutOrder } from "@/app/actions/order.actions";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import useTicketModal from "@/app/hooks/useTicketModal";
 
 interface EventClientProps {
     registrations?: Registration[];
@@ -52,6 +53,8 @@ const EventClient: React.FC<EventClientProps> = ({
     const createModal = useCreateModal();
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
+
+    const ticketModal = useTicketModal();
 
     const handleOpen = () => {
         console.log('clicked');
@@ -115,10 +118,18 @@ const EventClient: React.FC<EventClientProps> = ({
             });
     };
 
+
+
+
     const category = useMemo(() => {
         return categories.find((item) => 
         item.label === event.category);
     }, [event.category])
+
+
+    const viewTicket = (() => {
+        ticketModal.onOpen();
+    })
 
     // let likedBy = [...(event?.likedBy || [])];
     const coordinates: [number, number] = [40.748817, -73.985428];
@@ -189,26 +200,13 @@ const EventClient: React.FC<EventClientProps> = ({
                                         label='Cancel'
                                         onClick={handleCancelRegistration}
                                     />
-                                    {(event.paidEvent == true) ? (
-                                        <form action={onCheckout} method="post">
-                                            <Button
-                                                label='Pay'
-                                                onClick={() => {}}
-                                                outline
-                                            />
-                                        </form>
-                                        
-                                    ) : (
-                                        <Button
-                                            label='Generate Ticket'
-                                            onClick={() => {}}
+                                    <Button
+                                            label='View Ticket'
+                                            onClick={viewTicket}
                                             outline
                                         />
-                                    )
-                                    
-                                    }
 
-                                </div>
+                                    </div>
                                 
                                 ) : (
                                 <Button

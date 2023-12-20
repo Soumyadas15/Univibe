@@ -5,7 +5,8 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getUserById from "@/app/actions/getUserById";
 import getRegistrationData from "@/app/actions/getRegistrationDetails";
 import EventClient2 from "./EventClient2";
-
+import { getTicketDetails } from "@/app/actions/getTicketDetails";
+import generateQRCode from "@/app/utils/generateQRCode";
 
 interface IParams {
     eventId?: string;
@@ -19,6 +20,9 @@ const EventPage = async (
 
     //@ts-ignore
     const registered = await getRegistrationData(event?.id);
+    //@ts-ignore
+    const ticket = await getTicketDetails(currentUser?.id, event?.id);
+    const qrUrl = await generateQRCode(ticket);
 
     console.log("Drive")
     if (!event) {
@@ -42,6 +46,7 @@ const EventPage = async (
                     isRegistered={registered}
                     event={event}
                     currentUser={currentUser}
+                    ticketData={qrUrl}
                 />
             </div>
      </>
