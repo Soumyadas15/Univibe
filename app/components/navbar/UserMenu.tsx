@@ -168,10 +168,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             <div className="hidden md:block">
                                 <MenuItem label="My events" onClick={() => (router.push('/my-events'))} />
                             </div>
-
-                            <div className="hidden md:block">
-                                <MenuItem label="Add event" onClick={addEventToggle} />
-                            </div>
                             
                             <MenuItem label="Logout" onClick={() => signOut()} />
                         </>

@@ -13,9 +13,12 @@ import { SafeEvent, SafeUser } from "@/app/types";
 import { categories } from "@/app/utils/categories";
 import { Registration } from "@prisma/client"
 import moment from "moment";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { loadStripe } from '@stripe/stripe-js';
 import { checkoutOrder } from "@/app/actions/order.actions";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface EventClientProps {
     registrations?: Registration[];
@@ -47,6 +50,8 @@ const EventClient: React.FC<EventClientProps> = ({
     const eventRegistrationModal = useEventRegistrationModal();
     const incompleteModal = useIncompleteModal();
     const createModal = useCreateModal();
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
 
     const handleOpen = () => {
         console.log('clicked');
@@ -66,6 +71,8 @@ const EventClient: React.FC<EventClientProps> = ({
         await checkoutOrder(order);
     }
 
+
+
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
@@ -77,6 +84,24 @@ const EventClient: React.FC<EventClientProps> = ({
           console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
       }, []);
+
+      const handleCancelRegistration = async () => {
+        setIsLoading(true);
+    
+        try {
+            await axios.delete('/api/registrations', {
+                data: { 
+                    eventId: event.id, 
+                    userId: currentUser?.id 
+                }
+            });
+            toast.success('Registration cancelled successfully');
+            eventRegistrationModal.onClose();
+            router.refresh(); 
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const category = useMemo(() => {
         return categories.find((item) => 
@@ -148,9 +173,9 @@ const EventClient: React.FC<EventClientProps> = ({
                             {isRegistered ? (
                                 <div className="flex flex-col sm:flex-col md:flex-row gap-3">
                                     <Button
-                                        disabled={true}
-                                        label='Registered'
-                                        onClick={() => {}}
+                                        disabled={false}
+                                        label='Cancel'
+                                        onClick={handleCancelRegistration}
                                     />
                                     {(event.paidEvent == true) ? (
                                         <form action={onCheckout} method="post">

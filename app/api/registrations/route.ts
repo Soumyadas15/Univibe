@@ -37,3 +37,47 @@ export async function POST(request: Request) {
         }
     }
 }
+
+export async function DELETE(request: Request) {
+    try {
+        const currentUser = await getCurrentUser();
+
+        if (!currentUser) {
+            return new Response("User not authenticated", { status: 401 });
+        }
+
+        const body = await request.json();
+        const { eventId, userId } = body;
+
+        if (currentUser.id !== userId) {
+            return new Response("Unauthorized", { status: 403 });
+        }
+
+        // Find the registration
+        const registration = await prisma.registration.findFirst({
+            where: {
+                eventId: parseInt(eventId),
+                userId: parseInt(userId),
+            },
+        });
+
+        if (!registration) {
+            return new Response("Registration not found", { status: 404 });
+        }
+
+        // Delete the registration
+        await prisma.registration.delete({
+            where: { id: registration.id },
+        });
+
+        return new Response("Registration cancelled successfully", { status: 200 });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error("Cancellation error:", error.message);
+            return new Response(`Internal Server Error: ${error.message}`, { status: 500 });
+        } else {
+            console.error("Unexpected error:", error);
+            return new Response("Internal Server Error", { status: 500 });
+        }
+    }
+}

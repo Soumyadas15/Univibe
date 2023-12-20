@@ -19,6 +19,9 @@ import { checkoutOrder } from "@/app/actions/order.actions";
 import Image from "next/image";
 //@ts-ignore
 import ColorThief from 'colorthief';
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface EventClient2Props {
     registrations?: Registration[];
@@ -54,12 +57,17 @@ const EventClient2: React.FC<EventClient2Props> = ({
     const [cloudinaryUrl, setCloudinaryUrl] = useState('');
     const [colorPalette, setColorPalette] = useState<string[]>([]);
     const imageRef = useRef<HTMLImageElement>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+
+
     
 
     const handleOpen = () => {
         console.log('clicked');
         incompleteModal.onOpen();
     }
+
 
     useEffect(() => {
         if (imageRef.current) {
@@ -79,6 +87,8 @@ const EventClient2: React.FC<EventClient2Props> = ({
         }
     }, [event.imageSrc]);
 
+
+
     const [color1, color2, color3, color4, color5, color6] = colorPalette.length >= 6 
         ? colorPalette 
         : ['#FF00F5', '#00FF75', '#D50000', '#FF5733', '#33FF57', '#3357FF'];
@@ -90,9 +100,11 @@ const EventClient2: React.FC<EventClient2Props> = ({
         backgroundBlendMode: 'overlay, difference, normal'
     };
 
+
+
+
     
     const onCheckout = async () => {
-        // console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
         const order = {
             eventTitle: event.title,
             eventId: event.id,
@@ -105,7 +117,6 @@ const EventClient2: React.FC<EventClient2Props> = ({
     }
 
     useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
           console.log('Order placed! You will receive an email confirmation.');
@@ -116,10 +127,41 @@ const EventClient2: React.FC<EventClient2Props> = ({
         }
       }, []);
 
+
+
+
+
+    //Handles registration cancellation
+
+    const handleCancelRegistration = async () => {
+        setIsLoading(true);
+    
+        try {
+            // Replace with your actual API endpoint and data
+            await axios.delete('/api/registrations', {
+                data: { 
+                    eventId: event.id, 
+                    userId: currentUser?.id 
+                }
+            });
+            toast.success('Registration cancelled successfully');
+            eventRegistrationModal.onClose();
+            router.refresh(); 
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
     const category = useMemo(() => {
         return categories.find((item) => 
         item.label === event.category);
     }, [event.category])
+
+
+
+
+
 
     // let likedBy = [...(event?.likedBy || [])];
     const coordinates: [number, number] = [40.748817, -73.985428];
@@ -180,9 +222,9 @@ const EventClient2: React.FC<EventClient2Props> = ({
                             {isRegistered ? (
                                 <div className="flex flex-col sm:flex-col md:flex-row gap-3">
                                     <Button
-                                        disabled={true}
-                                        label='Registered'
-                                        onClick={() => {}}
+                                        disabled={isLoading}
+                                        label='Cancel'
+                                        onClick={handleCancelRegistration}
                                     />
                                     {(event.paidEvent == true) ? (
                                         <form action={onCheckout} method="post">

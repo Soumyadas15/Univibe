@@ -26,6 +26,7 @@ model User {
   registrations   Registration[]
   tokens          Token[]
   favoriteEvents  FavoriteEvent[]
+  tickets        Ticket[]
 }
 
 model Event {
@@ -50,6 +51,7 @@ model Event {
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   registrations   Registration[]
   likedByUsers    FavoriteEvent[]
+  tickets        Ticket[]
 }
 
 model Token {
@@ -92,6 +94,7 @@ model Registration {
   member2         String?
   member3         String?
   member4         String?
+  hasPaid         Boolean? @default(false)
   createdAt       DateTime @default(now())
 
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -105,4 +108,23 @@ model FavoriteEvent {
   event   Event @relation(fields: [eventId], references: [id])
 
   @@id([userId, eventId])
+}
+
+model Ticket {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  eventId        Int
+  ticketNumber   String   @unique
+  issuedAt       DateTime @default(now())
+  validTill      DateTime?
+  isUsed         Boolean?  @default(false)
+  phone          String?
+  semester       String?
+  name           String?
+  member1        String?
+  member2        String?
+  member3        String?
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }

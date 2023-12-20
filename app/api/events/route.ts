@@ -10,6 +10,10 @@ export async function POST(request: Request) {
             return new Response("User not authenticated", { status: 401 });
         }
 
+        if (!currentUser.isAdmin) {
+            return new Response("You don't have the required permissions", { status: 401 });
+        }
+
         const body = await request.json();
         const { category, department, venue, college, imageSrc, team, memberCount, title, description, date, paidEvent, price } = body;
 
