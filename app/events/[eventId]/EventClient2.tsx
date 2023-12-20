@@ -229,43 +229,42 @@ const EventClient2: React.FC<EventClient2Props> = ({
                         
                     />
                     </div>
-                    <div className="w-full">
+                    <div className="w-full flex items-center justify-between">
+                        <div className="w-[49%] h-full">
                             {isRegistered ? (
-                                <div className="flex flex-col sm:flex-col md:flex-row gap-3">
-                                    <Button
-                                        disabled={isLoading}
-                                        label='Cancel'
-                                        onClick={handleCancelRegistration}
-                                    />
-                                    {(event.paidEvent == true) ? (
-                                        <form action={onCheckout} method="post">
-                                            <Button
-                                                label='Pay'
-                                                onClick={() => {}}
-                                                outline
-                                            />
-                                        </form>
-                                        
-                                    ) : (
-                                        <Button
-                                            label='Generate Ticket'
-                                            onClick={() => {}}
-                                            outline
-                                        />
-                                    )
-                                    
-                                    }
-
-                                </div>
-                                
-                                ) : (
                                 <Button
-                                    disabled={false}
+                                    disabled={isLoading}
+                                    label='Cancel'
+                                    onClick={handleCancelRegistration}
+                                />
+                            ) : (
+                                <Button
+                                    disabled={isLoading}
                                     label='Register'
                                     onClick={eventRegistrationModal.onOpen}
                                 />
-                                )}
-                        
+                            )}
+                        </div>
+                        <div className="w-[49%] h-full">
+                            {isRegistered ? (
+                                <Button
+                                    disabled={false}
+                                    label='Generate ticket'
+                                    onClick={() => {}}
+                                    outline
+                                />
+                            ) : (
+                                <div className="hidden">
+                                    <Button
+                                        disabled={true}
+                                        label='Generate ticket'
+                                        onClick={() => {}}
+                                        outline
+                                    />
+                                </div>
+                                
+                            )}
+                        </div>
                     </div>
                     <div className="text-md dark:text-[#dadada] leading-8 font-light">
                         {event.description}
