@@ -39,7 +39,7 @@ const BookingsPage = async () => {
                 />
                 <div className='pt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 gap-8'>
                 {events.map((event: any) => (
-                    <div>
+                    <div key={event.id}>
                         <EventCard
                             currentUser={currentUser}
                             key={event.id}
