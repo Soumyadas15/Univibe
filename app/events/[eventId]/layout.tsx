@@ -29,21 +29,6 @@ const MainLayout = async ({
     const ticket = await getTicketDetails(currentUser?.id, event?.id);
     const qrUrl = await generateQRCode(ticket);
     
-    
-    // if (likedBy && likedBy.length > 0) {
-    //     await Promise.all(likedBy.map(async (userId) => {
-    //         if (userId) {
-    //             try {
-    //                 const likedUser = await getUserById({ userId });
-    //                 if (likedUser && likedUser) {
-    //                     users.push(likedUser);
-    //                 }
-    //             } catch (error) {
-    //                 console.error(`Error fetching user with ID ${userId}`);
-    //             }
-    //         }
-    //     }));
-    // }
     console.log(users);
 
     return ( 

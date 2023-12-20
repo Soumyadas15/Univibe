@@ -25,7 +25,8 @@ interface ListingCardProps {
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null
+  currentUser?: SafeUser | null;
+  showTicket?: Boolean;
 };
 
 const EventCard: React.FC<ListingCardProps> = ({
@@ -36,6 +37,7 @@ const EventCard: React.FC<ListingCardProps> = ({
   actionLabel,
   actionId = '',
   currentUser,
+  showTicket,
 }) => {
   const router = useRouter();
   const { getByValue } = useCountries();

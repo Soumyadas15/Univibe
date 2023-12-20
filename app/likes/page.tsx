@@ -19,8 +19,7 @@ const LikePage = async () => {
     if (likedEvents.length === 0){
         return (
             <EmptyState
-                title="Work underway"
-                subtitle="This page will be made soon"
+                title="No Liked Events"
             />
         )
     }
