@@ -1,36 +1,34 @@
 import prisma from '@/app/libs/prismadb';
+import getCurrentUser from './getCurrentUser';
 
-export interface IEventParams {
-    userId?: number;
-}
-
-export default async function getBookedEvents(params: IEventParams) {
+export default async function getBookedEvents() {
     try {
-        const { userId } = params;
+        const currentUser = await getCurrentUser();
 
-        if (userId === undefined) {
-            throw new Error("User ID is required");
+        if (!currentUser) {
+            return [];
         }
 
-        const registrations = await prisma.registration.findMany({
+        const bookedEvents = await prisma.registration.findMany({
             where: {
-                userId: userId
+                userId: currentUser.id
             },
             include: {
                 event: true
             }
         });
-        const registeredEvents = registrations.map(registration => {
-            const { event } = registration;
-            return {
-                ...event,
-                createdAt: event.createdAt.toISOString(),
-                date: event.date.toISOString()
-            };
-        });
 
-        return registeredEvents;
-    } catch (error: any) {
-        throw new Error(error.message || "An error occurred while fetching events.");
+        const safebookedEvents = bookedEvents.map(({ event }) => ({
+            ...event,
+            createdAt: event.createdAt.toISOString()
+        }));
+
+        return safebookedEvents;
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        } else {
+            throw new Error('An unknown error occurred');
+        }
     }
 }
