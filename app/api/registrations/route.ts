@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { sendMail } from "@/app/utils/mailSender";
 
 export async function POST(request: Request) {
     try {
@@ -25,6 +26,13 @@ export async function POST(request: Request) {
             member3: member3,  
         }
     });
+    
+    let userEmail: string;
+    //@ts-ignore
+    userEmail = currentUser?.email;
+    const emailSubject = 'Thanks for registering';
+    const emailText = `You have successfully registerd for the event! On the next steps, if the event is paid, you might have to verify your payment at the designated place to get access to the ticket. Otherwise you can download the tiket from the event page itself. We can't wait to see you have fun there.`
+    await sendMail(emailSubject, userEmail, emailText);
 
     return new Response(JSON.stringify(registration), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {

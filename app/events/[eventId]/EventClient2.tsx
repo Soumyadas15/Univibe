@@ -221,20 +221,11 @@ const EventClient2: React.FC<EventClient2Props> = ({
             </div>
             <div className="w-full ">
                 <div className="flex flex-col gap-6 items-start mt-20">
-                    <div className="text-3xl font-bold">
+                    <div className="text-4xl font-bold">
                         {event.title}
                     </div>
-                    <div className="scale-[0.8]">
-                    <EventDateInfo
-                        day={trimmedDay}
-                        month={abbreviatedMonth}
-                        year={year}
-                        //@ts-ignore
-                        venue={event.venue}
-                        //@ts-ignore
-                        department={event.department}
-                        
-                    />
+                    <div className="">
+                       <p>Created by {event?.title}</p>
                     </div>
                     <div className="w-full flex items-center justify-between">
                         <div className="w-[49%] h-full">
@@ -273,10 +264,14 @@ const EventClient2: React.FC<EventClient2Props> = ({
                             )}
                         </div>
                     </div>
-                    <div className="text-md dark:text-[#dadada] leading-8 font-light">
-                        {event.description}
-                        
+                    <div className="flex flex-col gap-2 items-start mt-10">
+                        <div className="text-xl font-bold">About {event.title}</div>
+                        <div className="text-md dark:text-[#dadada] leading-8 font-light">
+                            {event.description}
+                            
+                        </div>
                     </div>
+                    
                     <div className="w-full">
                         <Map
                             center={coordinates}

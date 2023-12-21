@@ -38,7 +38,7 @@ const TicketModal: React.FC<TicketModalProps> = ({
                             </div>
                             
                         </div>
-                        <hr className="border-1 border-white w-[90%]"/>
+                        <hr className="border-1 border-white w-[90%] border-dashed"/>
                         <div className="w-full h-[55%] rounded-lg flex items-end">
                             <div className="w-full h-[90%] flex flex-col items-center justify-between">
                                 <div className="text-2xl font-semibold text-white">{currEvent?.title}</div>
