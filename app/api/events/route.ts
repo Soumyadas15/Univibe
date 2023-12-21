@@ -15,19 +15,17 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        const { category, department, venue, college, imageSrc, team, memberCount, title, description, date, paidEvent, price } = body;
+        const { category, department, venue, college, imageSrc, team, memberCount, title, description, date, paidEvent, price, cancellable } = body;
 
-        // Validate required fields
         if (!title || !description || !date || !category || !department || !venue || !imageSrc) {
             return new Response("Missing required fields", { status: 400 });
         }
 
-        // Create the event
         const event = await prisma.event.create({
             data: {
                 title,
                 description,
-                date: new Date(date), // Ensure proper date format
+                date: new Date(date),
                 category,
                 department,
                 venue,
@@ -38,6 +36,7 @@ export async function POST(request: Request) {
                 userId: currentUser.id,
                 paidEvent,
                 price,
+                cancellable
             }
         });
 

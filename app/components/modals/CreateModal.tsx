@@ -75,6 +75,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
             date: '',
             paidEvent: false,
             price: 0,
+            cancellable: false,
         }
     })
 
@@ -87,6 +88,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
     const memberCount = watch('memberCount');
     const team = watch('team');
     const price = watch('price');
+    const cancellable = watch('cancellable');
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -104,6 +106,11 @@ const CreateModal: React.FC<CreateModalProps> = ({
         if (!value) {
             setCustomValue('memberCount', 1); 
         }
+    };
+
+
+    const handleCancelCheckbox = (value: boolean) => {
+        setCustomValue('cancellable', value);
     };
 
     const handlePriceCheckboxChange = (value: boolean) => {
@@ -350,6 +357,12 @@ const CreateModal: React.FC<CreateModalProps> = ({
                             end={5}
                             title="Member count" 
                             subtitle="How many members should teams consist?"
+                        />
+                        <hr className="border-t-1 border-neutral-500 dark:border-neutral-800" />
+                        <Checkbox
+                            title="Allow registration cancellation"
+                            value = {cancellable}
+                            onChange={handleCancelCheckbox}
                         />
                     </div>
                 </motion.div>

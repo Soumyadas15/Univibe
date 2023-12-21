@@ -229,7 +229,8 @@ const EventClient2: React.FC<EventClient2Props> = ({
                     </div>
                     <div className="w-full flex items-center justify-between">
                         <div className="w-[49%] h-full">
-                            {isRegistered ? (
+                        {isRegistered ? (
+                            event.cancellable ? (
                                 <Button
                                     disabled={isLoading}
                                     label='Cancel'
@@ -237,11 +238,18 @@ const EventClient2: React.FC<EventClient2Props> = ({
                                 />
                             ) : (
                                 <Button
-                                    disabled={isLoading}
-                                    label='Register'
-                                    onClick={eventRegistrationModal.onOpen}
+                                    disabled
+                                    label='Cancellation unavailable'
+                                    onClick={() => {}}
                                 />
-                            )}
+                            )
+                        ) : (
+                            <Button
+                                disabled={isLoading}
+                                label='Register'
+                                onClick={eventRegistrationModal.onOpen}
+                            />
+                        )}
                         </div>
                         <div className="w-[49%] h-full">
                             {isRegistered ? (

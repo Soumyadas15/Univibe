@@ -51,7 +51,7 @@ const EventClient: React.FC<EventClientProps> = ({
     const eventRegistrationModal = useEventRegistrationModal();
     const incompleteModal = useIncompleteModal();
     const createModal = useCreateModal();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     const ticketModal = useTicketModal();
@@ -195,16 +195,26 @@ const EventClient: React.FC<EventClientProps> = ({
                             
                             {isRegistered ? (
                                 <div className="flex flex-col sm:flex-col md:flex-row gap-3">
-                                    <Button
-                                        disabled={isLoading}
-                                        label='Cancel'
-                                        onClick={handleCancelRegistration}
-                                    />
+                                    {event.cancellable ? (
+                                        <Button
+                                            disabled={isLoading}
+                                            label='Cancel'
+                                            onClick={handleCancelRegistration}
+                                        />
+                                    ) : (
+                                            <Button
+                                                disabled
+                                                label='Cancellation unavailable'
+                                                onClick={() => {}}
+                                            />
+                                        )
+                                    }
+                                    
                                     <Button
                                             label='View Ticket'
                                             onClick={viewTicket}
                                             outline
-                                        />
+                                    />
 
                                     </div>
                                 

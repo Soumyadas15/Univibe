@@ -46,7 +46,7 @@ model Event {
   memberCount     Int?
   paidEvent       Boolean?  @default(false)
   price           Int?
-  
+  cancellable     Boolean? @default(false)
 
   userId          Int
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
