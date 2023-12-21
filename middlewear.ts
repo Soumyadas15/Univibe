@@ -5,6 +5,7 @@ export const config = {
     "/my-events",
     "/events",
     "/bookings",
-    "/likes"
+    "/likes",
+    "/dashboard"
   ]
 };
