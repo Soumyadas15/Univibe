@@ -2,6 +2,7 @@
 
 
 
+import { usePathname, useRouter } from "next/navigation";
 import Container from "../Container";
 import { ModeToggle } from "../toggle/ThemeToggle";
 import Logo from "./Logo";
@@ -15,6 +16,16 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
     currentUser,
 }) => {
+
+    const currentPage = usePathname();
+    
+    const hiddenRoutes = ['/dashboard'];
+    //@ts-ignore
+    const shouldHideNavbar = currentPage.startsWith(hiddenRoutes);
+    //@ts-ignore
+    if (shouldHideNavbar) {
+        return null;
+    }
     
     return ( 
         <div className="

@@ -14,11 +14,13 @@ const uploadPreset = "cjuw9gms";
 interface ImageUploadProps {
   onChange: (value: string) => void;
   value: string;
+  customHeight?: string;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
   onChange,
-  value
+  value,
+  customHeight
 }) => {
   const handleUpload = useCallback((result: any) => {
     onChange(result.info.secure_url);
@@ -36,7 +38,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         return (
           <div
             onClick={() => open?.()}
-            className="
+            className={`
               relative
               cursor-pointer
               hover:opacity-70
@@ -44,7 +46,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               rounded-md 
               border-2 
               p-20 
-
+              ${customHeight}
               border-neutral-400
               dark:border-neutral-800
 
@@ -55,7 +57,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               gap-4
               text-neutral-400
               dark:text-neutral-600
-            "
+            `}
           >
             <ImagePlus
               size={50}

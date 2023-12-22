@@ -112,6 +112,29 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 ">
                     Create an event
                 </div>)}
+                {currentUser?.isAdmin  &&   (<div 
+                    onClick={() => (router.push('/dashboard'))}
+                    className="
+                        hidden
+                        md:block
+                        text-sm
+                        font-semibold
+                        py-3
+                        px-4
+                        rounded-full
+
+                        text-white
+                        dark:text-black
+
+                        bg-neutral-800
+                        dark:bg-neutral-100
+
+                        hover:opacity-75
+                        transition
+                        cursor-pointer
+                ">
+                    Dashboard
+                </div>)}
                 <div
                     onClick={toggleOpen}
                     className="
