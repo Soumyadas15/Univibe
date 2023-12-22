@@ -27,10 +27,13 @@ const DashboardPage = async () => {
     }
 
     return ( 
-        <DashboardClient
+        <div className="pb-20 pt-28">
+            <DashboardClient
                 events={myEvents}
                 currentUser={currentUser}
-        />
+            />
+        </div>
+        
     );
 }
  

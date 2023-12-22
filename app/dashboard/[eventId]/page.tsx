@@ -28,23 +28,32 @@ const DashboardDetails = async (
 
     return ( 
         
-            <div className="flex gap-4 w-full">
-                <div className="w-[40rem] screen flex flex-col gap-5">
-                    <Heading
-                        title={event?.title!}
-                    />
-                    <div className="w-[90%]">
-                        <DashboardDescription
-                            event={event!}
+            <div className="flex w-full">
+                <div className="sticky h-screen top-0 flex items-center">
+                        <Sidebar
+                            currentUser={currentUser}
+                            event={event}
                         />
+                </div>
+                <div className="w-full  flex justify-between px-10 pb-20">
+                   <div className="w-[60%] screen flex flex-col gap-5 pt-10">
+                        <Heading
+                            title={event?.title!}
+                        />
+                        <div className="w-[90%] ">
+                            <DashboardDescription
+                                event={event!}
+                            />
+                        </div>
                     </div>
+                    <div className=" w-[40%] h-[50%] sticky top-10">
+                        <DashboardEventImage
+                            //@ts-ignore
+                            event={event}
+                        />
+                    </div> 
                 </div>
-                <div className=" w-[47%] h-[30rem] sticky top-10">
-                    <DashboardEventImage
-                        //@ts-ignore
-                        event={event}
-                    />
-                </div>
+                
             </div>
             
         

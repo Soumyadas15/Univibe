@@ -27,7 +27,14 @@ const DashboardAnaltics = async (
 
     return ( 
         
-            <div>Event</div>
+        <div className="flex w-full">
+            <div className="sticky h-screen top-0 flex items-center">
+                    <Sidebar
+                        currentUser={currentUser}
+                        event={event}
+                    />
+            </div>
+        </div>
             
         
     );

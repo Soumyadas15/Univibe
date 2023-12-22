@@ -43,7 +43,7 @@ export default async function RootLayout({
             <ConfettiProvider />
             <Navbar currentUser = {currentUser} />
             <ModalProvider/>
-            <div className='pb-20 pt-28'>
+            <div className=''>
               <LocoScroll>
                 {children}
               </LocoScroll>

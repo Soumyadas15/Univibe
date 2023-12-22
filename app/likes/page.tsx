@@ -24,7 +24,7 @@ const LikePage = async () => {
         )
     }
     return ( 
-        <div>
+        <div className="pb-20 pt-28">
             <LikesClient
                 events={likedEvents}
                 currentUser={currentUser}

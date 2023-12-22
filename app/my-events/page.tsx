@@ -29,7 +29,7 @@ const MyEventsPage = async () => {
         )
     }
     return ( 
-        <div>
+        <div className="pb-20 pt-20">
             <MyEventsClient
                 events={myEvents}
                 currentUser={currentUser}

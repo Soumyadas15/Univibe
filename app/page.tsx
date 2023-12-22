@@ -39,72 +39,73 @@ const Home = async ({
   }
   return (
     <Container>
-      <div>
+      <div className='pb-20 pt-20'>
+        <div>
 
-        <FeaturedEvents searchParams={searchParams}/>
-      </div>
-      <div>
+          <FeaturedEvents searchParams={searchParams}/>
+        </div>
+        <div>
+          <PageHeader
+            title='Events in your college'
+            redirect={home}
+          />
+          <div className='block'>
+            {currentUser ? (
+              <div className='pt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 gap-8'>
+                {inMyCollege.map((event: any) => (
+                      <EventCard
+                        currentUser={currentUser}
+                        key={event.id}
+                        data={event}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className='flex items-center justify-center'>
+                      <EmptySignIn
+                        title='Please sign in'
+                        subtitle='to find events in your college'
+                      />
+                    </div>
+            )}
+          </div>
+          {/* <div className='block md:hidden'>
+            {currentUser ? (
+              // <div className=''>
+            <Carousel
+                  infiniteLoop={true}
+                  showStatus={false}
+                  showIndicators={false}
+                >
+                  {(inMyCollege.map((event: any) => (
+                    <div className="p-5 flex items-center justify-center" key={event.id}>
+                      <EventCard
+                        currentUser={currentUser}
+                        data={event}
+                      />
+                    </div>
+                  )) as React.ReactChild[])}
+            </Carousel>
+                
+                ) : (
+                  <div className='flex items-center justify-center'>
+                      <EmptySignIn
+                        title='Please sign in'
+                        subtitle='to find events in your college'
+                      />
+                    </div>
+            )}
+          </div> */}
+        </div>
+        <div className=''>
         <PageHeader
-          title='Events in your college'
-          redirect={home}
-        />
-        <div className='block'>
-          {currentUser ? (
-            <div className='pt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 gap-8'>
-              {inMyCollege.map((event: any) => (
-                    <EventCard
-                      currentUser={currentUser}
-                      key={event.id}
-                      data={event}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className='flex items-center justify-center'>
-                    <EmptySignIn
-                      title='Please sign in'
-                      subtitle='to find events in your college'
-                    />
-                  </div>
-          )}
+            title='Events in other colleges'
+            redirect={home}
+          />
+          <div className='mt-8 mb-8 md:mb-0'>
+            <OtherCollegesFeatured searchParams={searchParams}/>
+          </div>
         </div>
-        {/* <div className='block md:hidden'>
-          {currentUser ? (
-            // <div className=''>
-          <Carousel
-                infiniteLoop={true}
-                showStatus={false}
-                showIndicators={false}
-              >
-                {(inMyCollege.map((event: any) => (
-                  <div className="p-5 flex items-center justify-center" key={event.id}>
-                    <EventCard
-                      currentUser={currentUser}
-                      data={event}
-                    />
-                  </div>
-                )) as React.ReactChild[])}
-          </Carousel>
-              
-              ) : (
-                <div className='flex items-center justify-center'>
-                    <EmptySignIn
-                      title='Please sign in'
-                      subtitle='to find events in your college'
-                    />
-                  </div>
-          )}
-        </div> */}
-      </div>
-      <div className=''>
-      <PageHeader
-          title='Events in other colleges'
-          redirect={home}
-        />
-        <div className='mt-8 mb-8 md:mb-0'>
-          <OtherCollegesFeatured searchParams={searchParams}/>
-        </div>
-        
       </div>
     </Container>
   )

@@ -105,7 +105,7 @@ const DashboardDescription: React.FC<DashboardDescriptionProps> = ({ event }) =>
                     onInput={handleInputChange}
                 ></textarea>
             ) : (
-                <div className="text-justify">
+                <div className="text-justify leading-8 font-light">
                     {eventDesc}
                 </div>
             )}

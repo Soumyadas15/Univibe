@@ -33,16 +33,10 @@ const MainLayout = async ({
 
     return ( 
         
-            <main className="h-full -mt-20">
-                <div className="flex gap-4 w-full">
-                    <div className="h-[30rem] sticky top-10">
-                        <Sidebar
-                            currentUser={currentUser}
-                            event={event}
-                        />
+            <main className="flex w-full">
+                    <div className="w-full h-[30rem]">
+                        {children}
                     </div>
-                    {children}
-                </div>
                 
             </main>
     );

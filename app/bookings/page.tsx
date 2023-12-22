@@ -8,7 +8,7 @@ const BookingsPage = async () => {
     console.log(events.length);
 
     return (
-        <div>
+        <div className="pb-20 pt-28">
             <BookingClient
                 events={events}
                 currentUser={currentUser}
