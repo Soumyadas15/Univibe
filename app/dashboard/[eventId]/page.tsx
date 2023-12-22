@@ -29,11 +29,13 @@ const DashboardDetails = async (
     return ( 
         
             <div className="flex w-full">
-                <div className="sticky h-screen top-0 flex items-center">
-                        <Sidebar
-                            currentUser={currentUser}
-                            event={event}
-                        />
+                <div className="hidden md:block">
+                    <div className="sticky h-screen top-0 flex items-center">
+                            <Sidebar
+                                currentUser={currentUser}
+                                event={event}
+                            />
+                    </div>
                 </div>
                 <div className="w-full  flex justify-between px-10 pb-20">
                    <div className="w-[60%] screen flex flex-col gap-5 pt-10">

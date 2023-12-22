@@ -28,11 +28,13 @@ const DashboardRegistrations = async (
     return ( 
         
         <div className="flex w-full">
-            <div className="sticky h-screen top-0 flex items-center">
-                    <Sidebar
-                        currentUser={currentUser}
-                        event={event}
-                    />
+            <div className="hidden md:block">
+                <div className="sticky h-screen top-0 flex items-center">
+                        <Sidebar
+                            currentUser={currentUser}
+                            event={event}
+                        />
+                </div>
             </div>
         </div>
         
