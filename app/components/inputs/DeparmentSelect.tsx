@@ -17,12 +17,13 @@ const CollegeDepartmentSelect: React.FC<CollegeDepartmentSelectProps> = ({
   value,
   onChange,
 }) => {
+    const isDarkMode = useDarkMode();
   const college = collegesData.colleges.find((c) => c.name === collegeName);
 
   if (!college) {
     return null; 
   }
-  const isDarkMode = useDarkMode();
+  
   const customStyles = {
     control: (provided: any, state: any) => ({
         ...provided,
