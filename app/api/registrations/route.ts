@@ -12,10 +12,9 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { semester, member1, member2, member3, phone, name, eventId } = body;
+    const { semester, member1, member2, member3, phone, name, eventId, department } = body;
 
     const registration = await prisma.registration.create({
-
         data: {
             userId: currentUser.id,
             eventId: parseInt(eventId),
@@ -24,6 +23,7 @@ export async function POST(request: Request) {
             member1: member1,      
             member2: member2,      
             member3: member3,  
+            department: department
         }
     });
 

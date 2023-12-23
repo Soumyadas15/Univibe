@@ -2,7 +2,7 @@
 
 import useCreateModal from "@/app/hooks/useCreateModal";
 import useSuccessModal from "@/app/hooks/useSuccessModal";
-import { use, useCallback, useMemo, useState } from "react";
+import { use, useCallback, useEffect, useMemo, useState } from "react";
 import { useConfettiStore } from "@/app/hooks/useConfettiStore";
 import { categories } from "@/app/utils/categories";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
@@ -21,6 +21,7 @@ import DatePicker from "@/app/components/inputs/DatePicker";
 import Modal from "@/app/components/modals/Modal";
 import NumberInput from "@/app/components/inputs/NumberInput";
 import useRegisterSuccess from "@/app/hooks/useRegisterSuccess";
+import CollegeDepartmentSelect from "@/app/components/inputs/DeparmentSelect";
 
 enum STEPS {
     DESCRIPTION = 0,
@@ -46,6 +47,8 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const [isLoading, setIsLoading] = useState(false);
     const eventRegistrationModal = useEventRegistrationModal();
     const registerSuccess = useRegisterSuccess();
+
+    const [selectedDepartment, setSelectedDepartment] = useState('department')
 
     
     const eventName = currEvent ? currEvent.title : 'Event not found';
@@ -73,6 +76,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             member3: '',
             phone: '',
             name: '',
+            department: '',
             //@ts-ignore
             eventId: slug.eventId,
         }
@@ -85,6 +89,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
 
     // const category = watch('category');
 
+
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
             shouldValidate: true,
@@ -92,6 +97,10 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             shouldTouch: true,
         })
     }
+
+    useEffect(() => {
+        setCustomValue('department', selectedDepartment);
+    }, [selectedDepartment]);
     
     const onBack = () => {
         setStep((value) => value - 1);
@@ -107,7 +116,10 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         router.refresh();
     }
 
-
+    const handleDepartmentChange = (department: string) => {
+        // Handle the selected department
+        console.log('Selected Department:', department);
+      };
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         if (step !== STEPS.SEMESTER){
@@ -124,8 +136,8 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             member3: data.member3,
         }
         setIsLoading(true)
-        console.log(ticketData)
-        //@ts-ignore
+        console.log(data)
+        // //@ts-ignore
         
         axios.post('/api/registrations', data)
         .then(() => {
@@ -143,7 +155,6 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         if(step === STEPS.SEMESTER){
             return 'Register'
         }
-
         return 'Next'
     }, [step]);
 
@@ -160,7 +171,6 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
         confettiStore.onOpen();
     }, [createModal, successModal]);
 
-    // const imageSrc = watch('imageSrc');
 
     let bodyContent = (
         <div className="flex flex-col gap-8">
@@ -234,17 +244,14 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
                     subtitle="Add some more details"
                     center
                 />
-                <Input
-                    id='department'
-                    label='Department'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
+                <CollegeDepartmentSelect
+                    value={selectedDepartment}
+                    collegeName={currEvent?.college!}
+                    onChange={setSelectedDepartment}
                 />
                 <Input
                     id='semester'
-                    label='Venue'
+                    label='Semester'
                     disabled={false}
                     register={register}
                     errors={errors}
@@ -265,6 +272,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             title={`Register for ${eventName}`}
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
+            noHide
         />
      );
 }

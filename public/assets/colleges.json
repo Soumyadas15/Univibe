@@ -1,26 +1,44 @@
 {
-    "colleges": [
+  "colleges": [
       {
-        "name": "Dummy college 1",
-        "city": "Howrah",
-        "state": "West Bengal",
-        "latitude": 40.748817, 
-        "longitude": -73.985428
+          "name": "Dummy college 1",
+          "city": "Howrah",
+          "state": "West Bengal",
+          "latitude": 40.748817,
+          "longitude": -73.985428,
+          "departments": [
+              "CSE",
+              "ECE",
+              "EE",
+              "Mech",
+              "AUE",
+              "CSE DS",
+              "ECE VLSI"
+          ]
       },
       {
-        "name": "Dummy college 2",
-        "city": "Kharagpur",
-        "state": "West Bengal",
-        "latitude": 40.748817, 
-        "longitude": -73.985428
+          "name": "Dummy college 2",
+          "city": "Kharagpur",
+          "state": "West Bengal",
+          "latitude": 40.748817,
+          "longitude": -73.985428,
+          "departments": [
+              "Electronics",
+              "Chemistry"
+              
+          ]
       },
       {
-        "name": "Dummy college 3",
-        "city": "Bombay",
-        "state": "Maharashtra",
-        "latitude": 40.748817, 
-        "longitude": -73.985428
+          "name": "Dummy college 3",
+          "city": "Bombay",
+          "state": "Maharashtra",
+          "latitude": 40.748817,
+          "longitude": -73.985428,
+          "departments": [
+              "Physics",
+              "Economics"
+              
+          ]
       }
-    ]
-  }
-  
+  ]
+}

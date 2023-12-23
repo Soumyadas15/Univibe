@@ -17,6 +17,8 @@ import {
 import Button from "../Button";
 import { Event, Registration } from "@prisma/client";
 import HeartButton from "../HeartButton";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 interface ListingCardProps {
   data: SafeEvent;
@@ -63,10 +65,23 @@ const EventCard: React.FC<ListingCardProps> = ({
     onAction?.(actionId)
   }, [disabled, onAction, actionId]);
 
+  const handleClick = useCallback(() => {
+    router.push(`/events/${data.id}`);
+    const url = `/api/clicks/${data.id}`;
+    axios.post(url)
+      .then((response) => {
+        console.log('Logged click:', response.data);
+      })
+      .catch((error) => {
+        console.error('Something went wrong:', error);
+        toast.error('Something went wrong');
+      });
+  }, [data.id]);
+
 
   return (
     <div 
-      onClick={() => router.push(`/events/${data.id}`)} 
+      onClick={handleClick} 
       className="
           col-span-1 
           cursor-pointer 

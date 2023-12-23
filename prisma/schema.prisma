@@ -27,6 +27,7 @@ model User {
   tokens          Token[]
   favoriteEvents  FavoriteEvent[]
   tickets        Ticket[]
+  clickLogs ClickLog[]
 }
 
 model Event {
@@ -53,6 +54,7 @@ model Event {
   registrations   Registration[]
   likedByUsers    FavoriteEvent[]
   tickets        Ticket[]
+  clickLogs ClickLog[]
 }
 
 model Token {
@@ -91,6 +93,7 @@ model Registration {
   eventId         Int  
   phone           String
   semester        String
+  department      String?
   member1         String?
   member2         String?
   member3         String?
@@ -104,6 +107,7 @@ model Registration {
 model FavoriteEvent {
   userId  Int
   eventId Int
+  createdAt DateTime @default(now())
 
   user    User @relation(fields: [userId], references: [id])
   event   Event @relation(fields: [eventId], references: [id])
@@ -128,4 +132,19 @@ model Ticket {
 
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+
+//Logs clicks
+
+model ClickLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  clickedAt DateTime @default(now())
+
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
 }
