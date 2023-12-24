@@ -237,7 +237,12 @@ const EventClient2: React.FC<EventClient2Props> = ({
                                     onClick={handleCancelRegistration}
                                 />
                             ) : (
-                                <div></div>
+                                <Button
+                                    disabled
+                                    label='Cancellation unavailable'
+                                    onClick={() => {}}
+                                    dontShowLoading={true}
+                                />
                             )
                         ) : (
                             <Button
