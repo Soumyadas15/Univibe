@@ -1,5 +1,5 @@
 import prisma from '@/app/libs/prismadb';
-import { Event, User } from '@prisma/client'; // Assuming this import path is correct
+import { Event, User } from '@prisma/client';
 
 interface IParams {
     eventId?: string;
@@ -12,7 +12,7 @@ export default async function getEventById(params: IParams) {
         if (!eventId) {
             return null;
         }
-        const eventIdInt = parseInt(eventId, 10); // Convert eventId to an integer
+        const eventIdInt = parseInt(eventId, 10);
 
         const event = await prisma.event.findUnique({
             where: {
@@ -27,8 +27,7 @@ export default async function getEventById(params: IParams) {
             return null;
         }
 
-        // Assuming 'event' is of type 'Event & { user: User }'
-        const typedEvent = event as Event & { user: User }; // Adjust 'User' type as necessary
+        const typedEvent = event as Event & { user: User }; 
 
         return {
             ...typedEvent,
@@ -42,7 +41,7 @@ export default async function getEventById(params: IParams) {
         };
     } catch (error) {
         if (error instanceof Error) {
-            throw error; // Re-throw if it's an Error instance
+            throw error;
         } else {
             throw new Error('An unknown error occurred');
         }

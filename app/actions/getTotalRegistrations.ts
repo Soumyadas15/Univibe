@@ -1,9 +1,14 @@
 // getRegistrations.ts
 import prisma from '@/app/libs/prismadb'; // Ensure this path is correct for your prisma instance
 import { endOfDay, startOfDay } from 'date-fns';
+import colleges from '@/public/assets/colleges.json';
 
 interface IParams {
     eventId?: string;
+}
+
+interface DepartmentCounts {
+  [departmentName: string]: number;
 }
 
 export default async function getTotalRegistrations(params: IParams) {
@@ -69,7 +74,6 @@ export async function getTodayRegistrations(params: IParams) {
       },
     });
 
-    // Returning count of registrations today
     return registrations.length;
   } catch (error) {
     
@@ -80,4 +84,13 @@ export async function getTodayRegistrations(params: IParams) {
       throw new Error('An unknown error occurred');
     }
   }
+}
+function initializeDepartmentCounts() {
+  const departmentCounts: DepartmentCounts = {};
+  for (const college of colleges.colleges) {
+    for (const department of college.departments) {
+      departmentCounts[department] = 0;
+    }
+  }
+  return departmentCounts;
 }

@@ -12,7 +12,7 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
-  dontShowLoading?: boolean; // New prop
+  dontShowLoading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   outline,
   small,
   icon: Icon,
-  dontShowLoading = false, // Default value for the new prop
+  dontShowLoading = false,
 }) => {
   return (
     <button

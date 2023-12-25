@@ -11,6 +11,9 @@ import { Heart, MousePointerClick, Users } from "lucide-react";
 import getTotalClicks, { getTodayClicks } from "@/app/actions/getTotalClicks";
 import { getTodayLikes, getTotalLikes } from "@/app/actions/getLikedByUsers.ts";
 import DashboardEventImage from "../DashboardEventImage";
+import getTotalRegistrationsByDepartment from "@/app/actions/getTotalRegistrationsByDepartment";
+import Button from "@/app/components/Button";
+import BarGraph from "@/app/components/dashboard/analytics/BarGraph";
 
 
 interface IParams {
@@ -20,8 +23,6 @@ interface IParams {
 const DashboardAnaltics = async (
     { params } : { params: IParams}
 ) => {
-
-
 
     const event = await getEventById(params);
 
@@ -34,6 +35,9 @@ const DashboardAnaltics = async (
     const likes = await getTotalLikes(params);
     const likesToday = await getTodayLikes(params);
 
+    const registrationsByDepartment = await getTotalRegistrationsByDepartment(params);
+    console.log(registrationsByDepartment)
+    
 
     const currentUser = await getCurrentUser();
     if (event?.userId !== currentUser?.id){
@@ -57,7 +61,7 @@ const DashboardAnaltics = async (
                 </div>
             </div>
             
-            <div className=" w-full h-[70rem] flex flex-col gap-4">
+            <div className=" w-full h-[90rem] flex flex-col gap-4">
                 <div className="pt-10">
                     <Heading
                         title={`${event?.title!} analytics`}
@@ -65,8 +69,8 @@ const DashboardAnaltics = async (
                     />
                 </div>
                 <div className="w-full h-full flex">
-                    <div className=" w-[60%] h-full flex flex-col justify-between p-5 gap-6">
-                        <div className=" w-full h-full md:h-[35%] flex flex-col md:flex-row gap-3">
+                    <div className=" w-[60%] h-full flex flex-col justify-between p-5 gap-8">
+                        <div className=" w-full h-full md:h-[20%] flex flex-col md:flex-row gap-3">
                             <DataCard 
                                     label={clicks!} 
                                     subtitle="Clicks"
@@ -90,10 +94,16 @@ const DashboardAnaltics = async (
                             />
                         
                         </div>
-                        <div className="bg-neutral-300 dark:bg-neutral-800 w-full h-[50%] flex flex-col md:flex-row rounded-lg">
-
+                        <div className=" w-full h-[40%] flex flex-col rounded-lg items-center justify-center">
+                            <div className="flex flex-col h-[10%] w-full text-2xl text-left">
+                                Department wise registrations
+                            </div>
+                            <div className="h-[90%] flex items-center justify-center w-full">
+                                <BarGraph/>
+                            </div>
+                            
                         </div>
-                        <div className="bg-neutral-300 dark:bg-neutral-800 w-full h-[50%] flex flex-col md:flex-row rounded-lg">
+                        <div className="bg-neutral-300 dark:bg-neutral-800 w-full h-[30%] flex flex-col md:flex-row rounded-lg">
 
                         </div>
                     </div>
