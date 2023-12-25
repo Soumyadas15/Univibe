@@ -74,23 +74,23 @@ const DashboardAnaltics = async (
                             <DataCard 
                                     label={clicks!} 
                                     subtitle="Clicks"
-                                    gradient="bg-gradient-to-tr from-pink-300 to-pink-100"
+                                    gradient="bg-pink-200 dark:bg-pink-900 dark:bg-opacity-60"
                                     increase={clicksToday}
-                                    icon={{ component: <MousePointerClick size={30}/>, style: { color: 'black', opacity: '60%'}}}
+                                    icon={{ component: <MousePointerClick size={30} className="dark:text-white text-black"/>, style: { color: 'black', opacity: '60%'}}}
                             />
                             <DataCard 
                                 label={likes!}
                                 subtitle="Likes"
                                 increase={likesToday}
-                                gradient="bg-gradient-to-tr from-indigo-400 to-indigo-100"
-                                icon={{ component: <Heart size={30}/>, style: { color: 'black', opacity: '60%'}}}
+                                gradient="bg-indigo-200 dark:bg-indigo-900 dark:bg-opacity-60"
+                                icon={{ component: <Heart size={30} className="dark:text-white text-black"/>, style: { color: 'black', opacity: '60%'}}}
                             />
                             <DataCard 
                                 label={registrations.length!} 
                                 subtitle="Registrations"
-                                gradient="bg-gradient-to-tr from-green-300 to-green-100"
+                                gradient="bg-cyan-200 dark:bg-cyan-900 dark:bg-opacity-60"
                                 increase={registrationsToday}
-                                icon={{ component: <Users size={30}/>, style: { color: 'black', opacity: '60%'}}}
+                                icon={{ component: <Users size={30} className="dark:text-white text-black"/>}}
                             />
                         
                         </div>
