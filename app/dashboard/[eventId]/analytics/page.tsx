@@ -99,7 +99,7 @@ const DashboardAnaltics = async (
                                 Department wise registrations
                             </div>
                             <div className="h-[90%] flex items-center justify-center w-full">
-                                <BarGraph/>
+                                <BarGraph data={registrationsByDepartment}/>
                             </div>
                             
                         </div>

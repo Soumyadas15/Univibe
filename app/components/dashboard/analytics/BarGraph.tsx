@@ -46,6 +46,27 @@ const BarGraph: React.FC<BarChartProps> = ({
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
+
+    if (data) {
+      const labels = Object.keys(data);
+      const values = Object.values(data);
+
+      setChartData({
+        labels: labels,
+        datasets: [
+          {
+            label: 'Registration by department',
+            //@ts-ignore
+            data: values,
+            borderColor: 'rgb(216, 27, 96)',
+            backgroundColor: 'rgb(216, 27, 96)',
+            borderRadius: Number.MAX_VALUE,
+            borderSkipped: false,
+          },
+        ],
+      });
+    }
+
     setChartOptions({
       scales: {
         x: {
