@@ -14,17 +14,16 @@ export default async function getCurrentUser() {
       return null;
     }
 
-    // Prisma's query for finding a unique record
     const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email,
       },
       include: {
-        accounts: true, // Include related accounts
-        events: true, // Include related events
-        registrations: true, // Include related registrations
-        tokens: true, // Include related tokens
-        favoriteEvents: true, // Include related favorite events
+        accounts: true,
+        events: true, 
+        registrations: true, 
+        tokens: true, 
+        favoriteEvents: true, 
       },
     });
 

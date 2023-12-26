@@ -14,6 +14,10 @@ import DashboardEventImage from "../DashboardEventImage";
 import getTotalRegistrationsByDepartment from "@/app/actions/getTotalRegistrationsByDepartment";
 import Button from "@/app/components/Button";
 import BarGraph from "@/app/components/dashboard/analytics/BarGraph";
+import LineChart from "@/app/components/dashboard/analytics/LineChart";
+import EventBar from "@/app/components/dashboard/analytics/Eventbar";
+import getEvents from "@/app/actions/getEvents";
+import EventList from "./EventList";
 
 
 interface IParams {
@@ -40,6 +44,11 @@ const DashboardAnaltics = async (
     
 
     const currentUser = await getCurrentUser();
+
+    const myEvents = await getEvents({
+        userId: (currentUser?.id)
+    });
+    
     if (event?.userId !== currentUser?.id){
         return (
             <EmptyState
@@ -69,7 +78,7 @@ const DashboardAnaltics = async (
                     />
                 </div>
                 <div className="w-full h-full flex">
-                    <div className=" w-[60%] h-full flex flex-col justify-between p-5 gap-8">
+                    <div className=" w-[65%] h-full flex flex-col justify-between p-5 gap-8">
                         <div className=" w-full h-full md:h-[20%] flex flex-col md:flex-row gap-3">
                             <DataCard 
                                     label={clicks!} 
@@ -99,26 +108,17 @@ const DashboardAnaltics = async (
                                 Department wise registrations
                             </div>
                             <div className="h-[90%] flex items-center justify-center w-full rounded-xl">
-                                <BarGraph data={registrationsByDepartment}/>
+                                <LineChart/>
+                                
                             </div>
                             
                         </div>
-                        <div className="bg-neutral-300 dark:bg-neutral-800 w-full h-[30%] flex flex-col md:flex-row rounded-lg">
-
+                        <div className=" w-full h-[30%] flex rounded-lg items-center justify-center">
+                                <BarGraph data={registrationsByDepartment}/>
                         </div>
                     </div>
-                    <div className="w-[40%] h-full flex flex-col gap-6 -mt-10 items-center p-3">
-                        <div className="w-full h-[40%] rounded-2xl overflow-hidden">
-                        {/* <Image
-                            //@ts-ignore
-                            src={event?.imageSrc}
-                            //@ts-ignore
-                            alt={event?.title}
-                            height={800}
-                            width={800}
-                            className="object-cover w-full h-full"
-                        /> */}
-                        </div>
+                    <div className="w-[40%] h-full flex flex-col -mt-22 items-center p-3">
+                        <EventList events={myEvents} currEvent={event!}/>
                     </div>
                 </div>
                 
