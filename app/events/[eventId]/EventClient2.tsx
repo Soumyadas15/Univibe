@@ -23,6 +23,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useTicketModal from "@/app/hooks/useTicketModal";
+import EventDateInfo2 from "@/app/components/events/secondaryLayout/EventDateInfo2";
 
 interface EventClient2Props {
     registrations?: Registration[];
@@ -131,9 +132,6 @@ const EventClient2: React.FC<EventClient2Props> = ({
       }, []);
 
 
-
-
-
     //Handles registration cancellation
 
     const handleCancelRegistration = async () => {
@@ -186,7 +184,7 @@ const EventClient2: React.FC<EventClient2Props> = ({
 
     return ( 
        <Container>
-        <div className="flex w-full items-start gap-20"> 
+        <div className="flex w-full items-start gap-20 pb-20 pt-10"> 
             <div className="sticky top-0 flex h-screen w-full items-center">
                 <div className="relative w-full h-[90%] overflow-none transition duration-500">
                     {/* Gradient Div */}
@@ -224,9 +222,14 @@ const EventClient2: React.FC<EventClient2Props> = ({
                     <div className="text-4xl font-bold">
                         {event.title}
                     </div>
-                    <div className="">
-                       <p>Created by {event?.title}</p>
-                    </div>
+                    
+
+                    {/* event details */}
+                    
+                    <EventDateInfo2 event={event}/>
+
+                    {/* Buttons */}
+
                     <div className="w-full flex items-center justify-between">
                         <div className="w-[49%] h-full">
                         {isRegistered ? (
@@ -273,6 +276,9 @@ const EventClient2: React.FC<EventClient2Props> = ({
                             )}
                         </div>
                     </div>
+                    
+
+
                     <div className="flex flex-col gap-2 items-start mt-10">
                         <div className="text-xl font-bold">About {event.title}</div>
                         <div className="text-md dark:text-[#dadada] leading-8 font-light">

@@ -22,7 +22,7 @@ const EventBar: React.FC<EventBarInterface> = ({
                     flex 
                     items-center 
                     justify-center
-                    ${currentEvent ? 'bg-black' : 'bg-neutral-200'}
+                    ${currentEvent ? 'bg-black dark:bg-neutral-200' : 'bg-neutral-200 dark:bg-neutral-800'}
                     cursor-pointer
                 `}
                 onClick={() => router.push(`/dashboard/${event?.id}/analytics`)} 
@@ -44,7 +44,7 @@ const EventBar: React.FC<EventBarInterface> = ({
                             text-2xl 
                             font-semibold 
                             mt-1
-                            ${currentEvent ? 'text-white' : 'text-black'}
+                            ${currentEvent ? 'text-white dark:text-black' : 'text-black dark:text-white'}
                         `}>
                             {event?.title}
                     </div>
@@ -54,7 +54,8 @@ const EventBar: React.FC<EventBarInterface> = ({
                                 overflow-hidden 
                                 flex text-start
                                 
-                                ${currentEvent ? 'text-neutral-400' : 'text-neutral-600'}
+                        </div>
+                                ${currentEvent ? 'text-neutral-400 dark:text-neutral-800' : 'text-neutral-600 dark:text-neutral-400'}
                         `}>
                             Lorem ipsummdddmmmaesssa dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididuuuuuuuuuuuuuuuuuuuuuuunt
                         </div>

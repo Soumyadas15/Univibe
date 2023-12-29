@@ -83,7 +83,7 @@ const DashboardAnaltics = async (
                             <DataCard 
                                     label={clicks!} 
                                     subtitle="Clicks"
-                                    gradient="bg-pink-200 dark:bg-pink-900 dark:bg-opacity-60 transition ease-in-out duration-100"
+                                    gradient="bg-pink-200 dark:bg-[#59223b] transition ease-in-out duration-100"
                                     increase={clicksToday}
                                     icon={{ component: <MousePointerClick size={30} className="dark:text-white text-black"/>, style: { color: 'black', opacity: '60%'}}}
                             />
@@ -91,13 +91,13 @@ const DashboardAnaltics = async (
                                 label={likes!}
                                 subtitle="Likes"
                                 increase={likesToday}
-                                gradient="bg-indigo-200 dark:bg-indigo-800 dark:bg-opacity-50 transition ease-in-out duration-100"
+                                gradient="bg-indigo-200 dark:bg-[#21314a] transition ease-in-out duration-100"
                                 icon={{ component: <Heart size={30} className="dark:text-white text-black"/>, style: { color: 'black', opacity: '60%'}}}
                             />
                             <DataCard 
                                 label={registrations.length!} 
                                 subtitle="Registrations"
-                                gradient="bg-cyan-200 dark:bg-cyan-800 dark:bg-opacity-60 transition ease-in-out duration-100"
+                                gradient="bg-cyan-200 dark:bg-[#21464a] transition ease-in-out duration-100"
                                 increase={registrationsToday}
                                 icon={{ component: <Users size={30} className="dark:text-white text-black"/>}}
                             />
@@ -107,15 +107,23 @@ const DashboardAnaltics = async (
                             <div className="flex flex-col h-[10%] w-full text-2xl text-left">
                                 Department wise registrations
                             </div>
-                            <div className="h-[90%] flex items-center justify-center w-full rounded-xl">
+                            <div className="h-[90%] flex items-center justify-center w-full rounded-xl dark:bg-neutral-800">
                                 <LineChart/>
                                 
                             </div>
                             
                         </div>
-                        <div className=" w-full h-[30%] flex rounded-lg items-center justify-center">
+
+                        <div className=" w-full h-[40%] flex flex-col rounded-lg items-center justify-center">
+                            <div className="flex flex-col h-[10%] w-full text-2xl text-left">
+                                Department wise registrations
+                            </div>
+                            <div className="h-[90%] flex items-center justify-center w-full rounded-xl dark:bg-neutral-800">
                                 <BarGraph data={registrationsByDepartment}/>
+                                
+                            </div>
                         </div>
+                        
                     </div>
                     <div className="w-[40%] h-full flex flex-col -mt-22 items-center p-3">
                         <EventList events={myEvents} currEvent={event!}/>

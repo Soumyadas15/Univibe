@@ -136,7 +136,7 @@ const EventClient: React.FC<EventClientProps> = ({
 
     return ( 
        <Container>
-        <div className="max-w-screen-lg mx-auto">
+        <div className="max-w-screen-lg mx-auto pt-24 pb-20">
             <div className="flex flex-col gap-6 mt-[-25px]">
                 <EventHead
                     title={event.title}
