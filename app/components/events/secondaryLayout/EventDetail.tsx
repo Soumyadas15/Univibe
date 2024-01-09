@@ -16,7 +16,7 @@ const EventDetail: React.FC<EventDetailProps> = ({
     icon
 }) => {
     return ( 
-        <div className="h-[50%] w-[30%] flex items-center gap-3">
+        <div className="h-[50%] w-full flex items-center gap-1">
             {icon && (
                 <div style={icon.style} className="">
                     {icon.component}

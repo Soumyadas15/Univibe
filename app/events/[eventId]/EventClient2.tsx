@@ -33,6 +33,7 @@ interface EventClient2Props {
     currentUser?: SafeUser | null;
     isRegistered?: boolean;
     ticketData: any;
+    hasPaid? : boolean;
 }
 
 
@@ -42,7 +43,8 @@ const EventClient2: React.FC<EventClient2Props> = ({
     event,
     currentUser,
     isRegistered,
-    ticketData
+    ticketData,
+    hasPaid
 
 }) => {
 
@@ -180,123 +182,138 @@ const EventClient2: React.FC<EventClient2Props> = ({
 
 
     // let likedBy = [...(event?.likedBy || [])];
-    const coordinates: [number, number] = [40.748817, -73.985428];
+    const coordinates: [number, number] = [22.619687629455996, 88.34774099557224];
 
     return ( 
        <Container>
         <div className="flex w-full items-start gap-20 pb-20 pt-10"> 
-            <div className="sticky top-0 flex h-screen w-full items-center">
-                <div className="relative w-full h-[90%] overflow-none transition duration-500">
-                    {/* Gradient Div */}
-                    <div className="absolute inset-0 w-full h-full flex items-center justify-center blur-none dark:blur-2xl transition duration-500" style={gradientStyle}></div>
-                    
-                    {/* Image */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[85%] h-[85%]">
-                        <div className=" 
-                                    w-[90%] 
-                                    h-[90%] 
-                                    relative 
-                                    overflow-hidden "
-                        >
-                            <img
-                                ref={imageRef}
-                                alt={event.title}
-                                //@ts-ignore
-                                src={event.imageSrc}
-                                className="
-                                    object-cover 
-                                    h-full 
-                                    w-full
-                                "
-                                
-                                crossOrigin="anonymous"
-                            />
+            <div className="w-[50%] sticky top-0">
+                <div className=" flex h-screen w-full items-center">
+                    <div className="relative w-full h-[90%] overflow-none transition duration-500">
+                        {/* Gradient Div */}
+                        <div className="absolute inset-0 w-full h-full flex items-center justify-center blur-none dark:blur-2xl transition duration-500" style={gradientStyle}></div>
+                        
+                        {/* Image */}
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[85%] h-[85%]">
+                            <div className=" 
+                                        w-[90%] 
+                                        h-[90%] 
+                                        relative 
+                                        overflow-hidden "
+                            >
+                                <img
+                                    ref={imageRef}
+                                    alt={event.title}
+                                    //@ts-ignore
+                                    src={event.imageSrc}
+                                    className="
+                                        object-cover 
+                                        h-full 
+                                        w-full
+                                    "
+                                    
+                                    crossOrigin="anonymous"
+                                />
+                            </div>
+                            
                         </div>
                         
                     </div>
-                    
                 </div>
             </div>
-            <div className="w-full ">
-                <div className="flex flex-col gap-6 items-start mt-20">
-                    <div className="text-4xl font-bold">
-                        {event.title}
-                    </div>
-                    
+            <div className="w-[50%]">
+                <div className="w-full">
+                    <div className="flex flex-col gap-8 items-start mt-20">
+                        <div className="text-4xl font-bold">
+                            {event.title}
+                        </div>
+                        
 
-                    {/* event details */}
-                    
-                    <EventDateInfo2 event={event}/>
+                        {/* event details */}
+                        
+                        <EventDateInfo2 event={event}/>
 
-                    {/* Buttons */}
+                        {/* Buttons */}
 
-                    <div className="w-full flex items-center justify-between">
-                        <div className="w-[49%] h-full">
-                        {isRegistered ? (
-                            event.cancellable ? (
+                        <div className="w-full flex items-center justify-between">
+                            <div className="w-[49%] h-full">
+                            {isRegistered ? (
+                                event.cancellable ? (
+                                    <Button
+                                        disabled={isLoading}
+                                        label='Cancel'
+                                        onClick={handleCancelRegistration}
+                                    />
+                                ) : (
+                                    <Button
+                                        disabled
+                                        label='Cancellation unavailable'
+                                        onClick={() => {}}
+                                        dontShowLoading={true}
+                                    />
+                                )
+                            ) : (
                                 <Button
                                     disabled={isLoading}
-                                    label='Cancel'
-                                    onClick={handleCancelRegistration}
+                                    label='Register'
+                                    onClick={eventRegistrationModal.onOpen}
                                 />
-                            ) : (
-                                <Button
-                                    disabled
-                                    label='Cancellation unavailable'
-                                    onClick={() => {}}
-                                    dontShowLoading={true}
-                                />
-                            )
-                        ) : (
-                            <Button
-                                disabled={isLoading}
-                                label='Register'
-                                onClick={eventRegistrationModal.onOpen}
-                            />
-                        )}
-                        </div>
-                        <div className="w-[49%] h-full">
-                            {isRegistered ? (
-                                <Button
-                                    disabled={false}
-                                    label='View ticket'
-                                    onClick={viewTicket}
-                                    outline
-                                />
-                            ) : (
-                                <div className="hidden">
-                                    <Button
-                                        disabled={true}
-                                        label='Generate ticket'
-                                        onClick={() => {}}
-                                        outline
-                                    />
-                                </div>
-                                
                             )}
+                            </div>
+                            <div className="w-[49%] h-full">
+                                {isRegistered ? (
+                                    (hasPaid ? (
+                                            <Button
+                                                disabled={false}
+                                                label='View ticket'
+                                                onClick={viewTicket}
+                                                outline
+                                        />
+                                    ) : (
+                                            <Button
+                                                disabled={true}
+                                                label='Pay to generate ticket'
+                                                onClick={() => {}}
+                                                outline
+                                            />
+                                        ) 
+                                    )
+                                    
+                                ) : (
+                                    <div className="hidden">
+                                        <Button
+                                            disabled={true}
+                                            label='Generate ticket'
+                                            onClick={() => {}}
+                                            outline
+                                        />
+                                    </div>
+                                    
+                                )}
+                            </div>
                         </div>
+                        
+
+
+                        <div className="flex flex-col gap-2 items-start mt-10">
+                            <div className="text-xl font-bold">About {event.title}</div>
+                            <div className="text-md dark:text-[#dadada] leading-8 font-light">
+                                {event.description}
+                                
+                            </div>
+                        </div>
+                        
+                        <div className="w-full">
+                            <Map
+                                center={coordinates}
+                            />
+                        </div>
+                        
+                        
                     </div>
                     
 
-
-                    <div className="flex flex-col gap-2 items-start mt-10">
-                        <div className="text-xl font-bold">About {event.title}</div>
-                        <div className="text-md dark:text-[#dadada] leading-8 font-light">
-                            {event.description}
-                            
-                        </div>
-                    </div>
-                    
-                    <div className="w-full">
-                        <Map
-                            center={coordinates}
-                        />
-                    </div>
-                    
-                    
                 </div>
-                
-
             </div>
         </div>
        </Container>

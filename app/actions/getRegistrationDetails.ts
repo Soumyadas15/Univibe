@@ -57,10 +57,13 @@ export default async function getRegistrationData(eventId) {
         const currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            return [];
+            return {
+                hasRegistered: false,
+                hasPaid: false
+            };
         }
 
-        const hasRegistered = await prisma.registration.findFirst({
+        const registration = await prisma.registration.findFirst({
             where: {
                 userId: currentUser.id,
                 eventId: eventId
@@ -70,7 +73,17 @@ export default async function getRegistrationData(eventId) {
             }
         });
 
-        return Boolean(hasRegistered);
+        if (!registration) {
+            return {
+                hasRegistered: false,
+                hasPaid: false
+            };
+        }
+
+        return {
+            hasRegistered: true,
+            hasPaid: registration.hasPaid
+        };
     } catch (error) {
         if (error instanceof Error) {
             throw error; // Re-throw if it's an Error instance

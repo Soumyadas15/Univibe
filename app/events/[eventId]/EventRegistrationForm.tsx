@@ -48,6 +48,10 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
     const eventRegistrationModal = useEventRegistrationModal();
     const registerSuccess = useRegisterSuccess();
 
+    const [numberOfMembers, setNumberOfMembers] = useState(currEvent?.memberCount || 1);
+    let memberInputs = [];
+
+
     const [selectedDepartment, setSelectedDepartment] = useState('department')
 
     
@@ -74,6 +78,13 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             member1: '',
             member2: '',
             member3: '',
+            member4: '',
+            member5: '',
+            member6: '',
+            member7: '',
+            member8: '',
+            member9: '',
+            member10: '',
             phone: '',
             name: '',
             department: '',
@@ -81,6 +92,20 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
             eventId: slug.eventId,
         }
     })
+
+    for (let i = 1; i <= numberOfMembers; i++) {
+        memberInputs.push(
+            <Input
+                key={`member${i}`}
+                id={`member${i}`}
+                label={`Member ${i}`}
+                disabled={false}
+                register={register}
+                errors={errors}
+                required
+            />
+        );
+    }
 
     const handleDateSelect = (selectedDate: dayjs.Dayjs) => {
         const formattedDate = selectedDate.toISOString();
@@ -207,31 +232,7 @@ const EventRegiatrationModal: React.FC<CreateModalProps> = ({
                     subtitle='These will be sent to organizers'
                     center
                 />
-                <Input
-                    id='member1'
-                    label='Member 1'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
-                
-                <Input
-                    id='member2'
-                    label='Member 2'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
-                <Input
-                    id='member3'
-                    label='Member 3'
-                    disabled={false}
-                    register={register}
-                    errors={errors}
-                    required
-                />
+                {memberInputs}
             </div>
         )
     }

@@ -43,7 +43,9 @@ const EventPage = async (
             <div className="hidden md:block">
                 <EventClient2
                     //@ts-ignore
-                    isRegistered={registered}
+                    isRegistered={registered.hasRegistered}
+                    //@ts-ignore
+                    hasPaid={registered.hasPaid}
                     event={event}
                     currentUser={currentUser}
                     ticketData={qrUrl}

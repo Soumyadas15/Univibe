@@ -62,25 +62,19 @@ const Button: React.FC<ButtonProps> = ({
 
       <div className='h-full w-full flex items-center justify-center'>
         <div className='h-[75%] w-[95%] items-center justify-center flex'>
-          {disabled ? (
-            <div>
-              {!dontShowLoading ? (
-                <>
-                  <div className='block dark:hidden'>
-                    <div className='flex items-center justify-center w-[2rem]'>
-                      <Lottie animationData={animationData} />
-                    </div>
-                  </div>
-                  <div className='hidden dark:block'>
-                    <div className='flex items-center justify-center w-[8rem]'>
-                      <Lottie animationData={blackLoader} />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <div>{label}</div>
-              )}
-            </div>
+          {disabled && !outline && !dontShowLoading ? (
+            <>
+              <div className='block dark:hidden'>
+                <div className='flex items-center justify-center w-[2rem]'>
+                  <Lottie animationData={animationData} />
+                </div>
+              </div>
+              <div className='hidden dark:block'>
+                <div className='flex items-center justify-center w-[8rem]'>
+                  <Lottie animationData={blackLoader} />
+                </div>
+              </div>
+            </>
           ) : (
             <div>{label}</div>
           )}

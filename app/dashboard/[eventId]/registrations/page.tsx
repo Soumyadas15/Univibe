@@ -74,7 +74,11 @@ const DashboardRegistrations = async ({ params, searchParams }: { params: IParam
                         </div>
                     </div>
                     <div className="w-full h-[90%] overflow-y-scroll bg-neutral-300 dark:bg-neutral-800">
-                        <Table data={users}/>
+                        <Table 
+                            //@ts-ignore
+                            data={users} 
+                            //@ts-ignore
+                            event={event}/>
                     </div>
                     
                 </div>

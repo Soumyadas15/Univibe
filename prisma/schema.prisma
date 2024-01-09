@@ -98,6 +98,13 @@ model Registration {
   member2         String?
   member3         String?
   member4         String?
+  member5         String?
+  member6         String?
+  member7         String?
+  member8         String?
+  member9         String?
+  member10         String?
+  collegeName     String?
   hasPaid         Boolean? @default(false)
   createdAt       DateTime @default(now())
 

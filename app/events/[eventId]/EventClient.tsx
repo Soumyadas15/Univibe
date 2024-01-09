@@ -132,8 +132,7 @@ const EventClient: React.FC<EventClientProps> = ({
     })
 
     // let likedBy = [...(event?.likedBy || [])];
-    const coordinates: [number, number] = [40.748817, -73.985428];
-
+    const coordinates: [number, number] = [22.619687629455996, 88.34774099557224];
     return ( 
        <Container>
         <div className="max-w-screen-lg mx-auto pt-24 pb-20">
