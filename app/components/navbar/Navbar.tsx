@@ -31,8 +31,6 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="
                 fixed
                 w-full
-                bg-white
-                dark:bg-neutral-900
                 z-[2100]
         ">
             <div
